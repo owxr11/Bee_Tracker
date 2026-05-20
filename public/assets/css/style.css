@@ -1,0 +1,15 @@
+:root {
+ --sidebar-dark: rgba(26, 27, 31, 0.9) !important;
+ --ug-gold-bright: #f7db3c;
+ --ug-blue-muted: #4e6a88;
+ --bee-background: #f1f3f5;
+ --ug-gold-dark: rgba(255, 255, 255, 0.05);
+}
+/* Colores personalizados */
+.bg-sidebar-dark { background-color: var(--sidebar-dark) !important; }
+.text-ug-gold-bright { color: var(--ug-gold-bright) !important; }
+.text-col-dark { color: var(--sidebar-dark) !important; }
+.bg-ug-gold-bright { background-color: var(--ug-gold-bright) !important; }
+.bg-ug-blue-muted { background-color: var(--ug-blue-muted) !important; }
+.bg-ug-gold-dark { background-color: var(--ug-gold-dark) !important; }
+.bg-ug-hover { background-color: rgba(248, 239, 166, 0.05) !important; }
