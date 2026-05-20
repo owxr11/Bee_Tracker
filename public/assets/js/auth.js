@@ -1,12 +1,12 @@
 // js/auth.js
-import { auth, db } from './firebase.js';
+import { auth, db } from './firebase-config.js';
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     signOut, 
     onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
 // 1. Registrar usuario y crear su documento en Firestore
 export async function registerUser(email, password, name) {
