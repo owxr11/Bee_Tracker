@@ -104,9 +104,6 @@ body {
     border-color: var(--ci-primary-dark);
 }
 
-/* ==========================================
-   📌 SECCIÓN DE REGISTRO DE USUARIOS V5
-   ========================================== */
 
 .auth-image-panel {
     background-color: rgba(255, 255, 255, 0.01) !important;
@@ -115,7 +112,7 @@ body {
     z-index: 1;
 }
 
-/* El logo se mantiene masivo y limpio */
+
 .login-logo-huge {
     width: 75% !important;   
     max-width: 240px;        
@@ -125,7 +122,6 @@ body {
     border-radius: 2rem !important; 
 }
 
-/* Letras de la marca en formato masivo */
 .fw-black {
     font-weight: 900 !important;
 }
@@ -134,7 +130,7 @@ body {
     letter-spacing: 1.5px !important;
 }
 
-/* Espaciado extra largo para el subtítulo del logo gigante */
+
 .tracking-wide-lg {
     letter-spacing: 4px !important;
 }
@@ -165,9 +161,7 @@ body {
     }
 }
 
-/* ==========================================
-   SECCIÓN DE INICIO DE SESIÓN (LOGIN)
-   ========================================== */
+/* login */
 
 .login-body {
     background-color: #292b2e !important; /* Contraste profundo para el fondo */
@@ -207,7 +201,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Campos de entrada oscuros personalizados */
+
 .form-control-dark {
     background-color: rgba(255, 255, 255, 0.04) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -222,7 +216,6 @@ body {
     color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Estado de enfoque (Glow Oro) */
 .form-control-dark:focus {
     background-color: rgba(255, 255, 255, 0.07) !important;
     border-color: var(--ug-gold-bright) !important; /* #f7db3c */

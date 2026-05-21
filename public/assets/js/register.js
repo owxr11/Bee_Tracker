@@ -17,19 +17,19 @@ form?.addEventListener("submit", async (e) => {
     const password = passwordInput.value.trim();
     const confirmPassword = confirmPasswordInput.value.trim();
 
-    // 1. Modificación aquí: capturamos el objeto completo de validación
+
     const validation = validateRegister(name, email, password, confirmPassword);
     
-    // 2. Evaluamos la propiedad isValid del objeto devuelto
+ 
     if (!validation.isValid) {
-        // Pasamos únicamente la cadena de texto con el mensaje de error
+       
         showAlert("registerAlert", validation.message);
         return;
     }
 
     try {
         showLoader("registerBtn", "Creando cuenta...");
-        // Recuerda que registerUser recibe un objeto desestructurado
+        
         await registerUser({ name, email, password });
         
         showAlert("registerSuccess", "Cuenta creada correctamente. Redirigiendo...");

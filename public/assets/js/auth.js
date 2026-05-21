@@ -1,4 +1,3 @@
-// js/auth.js
 import { auth, db } from './firebase.js';
 import {
     createUserWithEmailAndPassword,
@@ -8,8 +7,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 1. Registrar usuario y crear su documento en Firestore
-// actualizada para recibir objetos
+
 export async function registerUser({ name, email, password, role = "client" }) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -30,7 +28,6 @@ export async function registerUser({ name, email, password, role = "client" }) {
     }
 }
 
-// 2. Iniciar Sesión
 export async function loginUser(email, password) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -42,7 +39,6 @@ export async function loginUser(email, password) {
     }
 }
 
-// 3. Cerrar Sesión
 export async function logoutUser() {
     try {
         await signOut(auth);
@@ -52,7 +48,6 @@ export async function logoutUser() {
     }
 }
 
-// 4. Observador del estado del usuario (Saber si hay alguien logueado)
 export function getCurrentUser(callback) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -63,7 +58,6 @@ export function getCurrentUser(callback) {
     });
 }
 
-// 5. Muestra una alerta en el elemento con el id proporcionado
 export function showAlert(id, message) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -71,7 +65,7 @@ export function showAlert(id, message) {
     el.classList.remove("d-none");
 }
 
-// 6. Oculta una alerta y limpia su contenido
+
 export function hideAlert(id) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -79,7 +73,6 @@ export function hideAlert(id) {
     el.textContent = "";
 }
 
-// 7. Cambia el estado del botón entre cargando y normal
 export function setButtonLoading(btn, isLoading, defaultHTML, loadingText) {
     if (!btn) return;
     btn.disabled = isLoading;
@@ -88,7 +81,6 @@ export function setButtonLoading(btn, isLoading, defaultHTML, loadingText) {
         : defaultHTML;
 }
 
-// 8. Traduce los códigos de error de Firebase a mensajes en español
 export function getFirebaseErrorMessage(error) {
     const mensajes = {
         "auth/email-already-in-use": "Este correo ya está registrado.",
