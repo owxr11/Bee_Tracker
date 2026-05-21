@@ -103,3 +103,168 @@ body {
     background-color: var(--ci-primary-dark);
     border-color: var(--ci-primary-dark);
 }
+
+/* ==========================================
+   📌 SECCIÓN DE REGISTRO DE USUARIOS V5
+   ========================================== */
+
+.auth-image-panel {
+    background-color: rgba(255, 255, 255, 0.01) !important;
+    border-right: 1px solid rgba(247, 219, 60, 0.15) !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* El logo se mantiene masivo y limpio */
+.login-logo-huge {
+    width: 75% !important;   
+    max-width: 240px;        
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 2rem !important; 
+}
+
+/* Letras de la marca en formato masivo */
+.fw-black {
+    font-weight: 900 !important;
+}
+
+.tracking-wide {
+    letter-spacing: 1.5px !important;
+}
+
+/* Espaciado extra largo para el subtítulo del logo gigante */
+.tracking-wide-lg {
+    letter-spacing: 4px !important;
+}
+
+.text-white-70 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.text-white-85 {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.italic-quote {
+    font-style: italic;
+    border-left: 2px solid var(--ug-gold-bright);
+    padding-left: 12px;
+}
+
+.hover-underline:hover {
+    text-decoration: underline !important;
+    color: #e5cb30 !important;
+}
+
+@media (max-width: 767.98px) {
+    .auth-image-panel {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(247, 219, 60, 0.15) !important;
+    }
+}
+
+/* ==========================================
+   SECCIÓN DE INICIO DE SESIÓN (LOGIN)
+   ========================================== */
+
+.login-body {
+    background-color: #292b2e !important; /* Contraste profundo para el fondo */
+    color: #ffffff;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Contenedor tipo Tarjeta de Cristal */
+.login-card {
+    background: var(--sidebar-dark) !important; 
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(247, 219, 60, 0.15) !important; 
+    border-radius: 28px !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+    box-shadow: 0 25px 60px rgba(247, 219, 60, 0.05);
+}
+
+/* Ajustes de tipografía y logos */
+.login-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.login-subtitle {
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.login-footer-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+}
+
+/* Campos de entrada oscuros personalizados */
+.form-control-dark {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 14px 16px 14px 44px !important; /* Desplazamiento por el icono */
+    font-size: 0.95rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control-dark::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Estado de enfoque (Glow Oro) */
+.form-control-dark:focus {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    border-color: var(--ug-gold-bright) !important; /* #f7db3c */
+    box-shadow: 0 0 0 4px rgba(247, 219, 60, 0.12) !important;
+}
+
+/* Iconos integrados en las cajas de texto */
+.input-group-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 1.1rem;
+    transition: color 0.25s ease;
+}
+
+/* Iluminación de icono en foco */
+.position-relative:focus-within .input-group-icon {
+    color: var(--ug-gold-bright);
+}
+
+/* Botón de acción Premium */
+.btn-ug-gold {
+    background-color: var(--ug-gold-bright) !important;
+    color: #1a1b1f !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: none !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    transition: all 0.25s ease;
+}
+
+.btn-ug-gold:hover {
+    background-color: #e5cb30 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(247, 219, 60, 0.25);
+}
+
+.btn-ug-gold:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(247, 219, 60, 0.25);
+}

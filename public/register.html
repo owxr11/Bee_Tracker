@@ -5,163 +5,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UGPS | Registro</title>
+    <link rel="shortcut icon" href="./assets/img/logoUGPS.png" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/public/assets/css/style.css">
-
-    <style>
-        body.auth-page {
-            background-color: var(--bee-background);
-        }
-
-        .navbar {
-            background-color: var(--ug-blue-muted);
-        }
-
-        .form-control::placeholder {
-            color: #b0b7bf;
-            font-size: 0.85em;
-        }
-
-        .auth-image-panel {
-            background-color: var(--ug-blue-muted);
-            border-right: 4px solid var(--ug-gold-bright);
-        }
-
-        .brand-badge {
-            background-color: var(--ug-gold-bright);
-            color: var(--ug-blue-muted);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .btn-ug-primary {
-            background-color: var(--ug-gold-bright);
-            color: var(--ug-blue-muted);
-            border: none;
-            font-weight: bold;
-        }
-
-        .btn-ug-primary:hover {
-            background-color: #e5c92b;
-            color: #000;
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
+<body class="login-body d-flex align-items-center justify-content-center vh-100 p-3">
 
-<body class="auth-page">
-
-
-    <!--Esta es la barra de menu-->
-
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-light" href="./dashboard.html">
-                <i class="bi me-2"></i>
-                UGPS
-            </a>
-
-            <div class="d-flex align-items-center gap-2 ms-auto">
-                <span class="text-white small d-none d-md-inline">
-                    <!--     <i class="bi bi-person-circle me-1"></i>
-          <span id="navUserName">Usuario</span>-->
-                </span>
-            </div>
-        </div>
-    </nav>
-    <!--Fin barra de menu-->
-
-
-
-
-    <main class="min-vh-100 d-flex align-items-center justify-content-center auth-wrapper">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10">
-                    <div class="auth-card shadow-lg overflow-hidden">
-                        <div class="row g-0 align-items-stretch">
-                            <div
-                                class="col-md-6 auth-image-panel d-none d-md-flex flex-column justify-content-between p-4 text-white">
-                                <div>
-                                    <h2 class="display-6 fw-bold">UGPS</h2>
-                                    <p class="mb-0 text-white-75">"No hay nada mejor que llegar a tiempo"</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                
+                <div class="login-card overflow-hidden">
+                    <div class="row g-0 align-items-stretch">
+                        
+                        <div class="col-md-6 auth-image-panel d-none d-md-flex flex-column justify-content-between p-5 text-start">
+                            
+                            <div class="d-flex flex-column align-items-center justify-content-center flex-grow-1 w-100 my-auto">
+                                <div class="mb-4 text-center">
+                                    <img src="./assets/img/logoUGPS.png" alt="Logo UGPS" class="login-logo-huge img-fluid rounded-5 shadow-lg">
                                 </div>
-                                <div>
-                                    <p class="mb-1 text-uppercase small letter-spacing text-white-75">RASTREADOR DE
-                                        TRANSPORTE ESCOLAR</p>
-                                    <h3 class="h5 fw-bold">Rastrea con total confianza y seguridad tu bus a la
-                                        universidad</h3>
+
+                                <div class="text-center">
+                                    <h2 class="display-3 fw-black text-ug-gold-bright mb-0 lh-1">UGPS</h2>
+                                    <p class="text-white-50 text-uppercase fw-light tracking-wide-lg fs-5 mb-0">Bee Tracker</p>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 p-5 auth-form-panel bg-white">
-                                <div class="text-center mb-4">
-                                    <h1 class="h3 fw-bold mb-2">Crea tu cuenta</h1>
-                                    <p class="text-secondary mb-0">Ingresa tus datos para iniciar el proceso.</p>
-                                </div>
 
-                                <div id="registerAlert" class="alert alert-danger d-none" role="alert"></div>
-                                <div id="registerSuccess" class="alert alert-success d-none" role="alert"></div>
-
-                                <form id="registerForm" novalidate>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">NOMBRE COMPLETO</label>
-                                        <input type="text" class="form-control form-control-lg" id="name"
-                                            placeholder="Enrique Bunbury" required>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">DIRECCIÓN DE EMAIL</label>
-                                        <input type="email" class="form-control form-control-lg" id="email"
-                                            placeholder="ejemplo@correo.com" required>
-                                    </div>
-                                    <!--
-                  <div class="mb-3">
-                    <label for="plates" class="form-label">PLACAS VEHICULARES</label>
-                    <input type="text" class="form-control form-control-lg" id="plates" placeholder="Ej. GTF235F">
-                  </div>
--->
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">CONTRASEÑA</label>
-                                        <input type="password" class="form-control form-control-lg" id="password"
-                                            placeholder="Mínimo 6 caracteres" required>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="confirmPassword" class="form-label">CONFIRMAR CONTRASEÑA</label>
-                                        <input type="password" class="form-control form-control-lg" id="confirmPassword"
-                                            placeholder="Repite tu contraseña" required>
-                                    </div>
-
-                                    <div class="d-grid mb-3">
-                                        <button type="submit" id="registerBtn" class="btn btn-success btn-lg">
-                                            <i class="bi bi-person-check me-2"></i>
-                                            Crear cuenta
-                                        </button>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <p class="mb-0 text-secondary">¿Ya tienes cuenta? <a id="linkLogin"
-                                                href="./login.html" class="fw-semibold text-decoration-none">Inicia
-                                                sesión</a></p>
-                                    </div>
-                                </form>
+                            <div class="pt-3">
+                                <p class="mb-1 text-uppercase small tracking-wide text-ug-gold-bright fw-bold">Rastreador de Transporte Escolar</p>
+                                <h3 class="h6 fw-light text-white-85 lh-base mb-0">Rastrea con total confianza y seguridad tu bus a la universidad.</h3>
                             </div>
                         </div>
+
+                        <div class="col-12 col-md-6 p-4 p-sm-5 text-center d-flex flex-column justify-content-center">
+                            <div class="mb-4">
+                                <h1 class="h3 fw-black text-ug-gold-bright mb-2">Crea tu cuenta</h1>
+                                <p class="text-white-50 small mb-0">Ingresa tus datos para iniciar el proceso.</p>
+                            </div>
+
+                            <div id="registerAlert" class="alert alert-danger d-none" role="alert"></div>
+                            <div id="registerSuccess" class="alert alert-success d-none" role="alert"></div>
+
+                            <form id="registerForm" autocomplete="off" novalidate>
+                                
+                                <div class="mb-3 position-relative text-start">
+                                    <label for="name" class="form-label text-white-50 small ms-1 fw-medium">NOMBRE COMPLETO</label>
+                                    <div class="position-relative">
+                                        <i class="bi bi-person input-group-icon"></i>
+                                        <input type="text" class="form-control form-control-dark" id="name" placeholder="Enrique Bunbury" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 position-relative text-start">
+                                    <label Bel for="email" class="form-label text-white-50 small ms-1 fw-medium">DIRECCIÓN DE EMAIL</label>
+                                    <div class="position-relative">
+                                        <i class="bi bi-envelope input-group-icon"></i>
+                                        <input type="email" class="form-control form-control-dark" id="email" placeholder="ejemplo@ugto.mx" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 position-relative text-start">
+                                    <label for="password" class="form-label text-white-50 small ms-1 fw-medium">CONTRASEÑA</label>
+                                    <div class="position-relative">
+                                        <i class="bi bi-lock input-group-icon"></i>
+                                        <input type="password" class="form-control form-control-dark" id="password" placeholder="Mínimo 6 caracteres" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 position-relative text-start">
+                                    <label for="confirmPassword" class="form-label text-white-50 small ms-1 fw-medium">CONFIRMAR CONTRASEÑA</label>
+                                    <div class="position-relative">
+                                        <i class="bi bi-shield-lock input-group-icon"></i>
+                                        <input type="password" class="form-control form-control-dark" id="confirmPassword" placeholder="Repite tu contraseña" required>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mb-4">
+                                    <button type="submit" id="registerBtn" class="btn btn-ug-gold w-100 fs-5 transition-base">
+                                        <i class="bi bi-person-check me-2"></i>
+                                        Crear cuenta
+                                    </button>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="mb-0 text-white-50 small">¿Ya tienes cuenta? <a id="linkLogin" href="./login.html" class="text-ug-gold-bright fw-bold text-decoration-none hover-underline">Inicia sesión</a></p>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
-                    <p class="text-center text-muted mt-4 small">UGPS - La mejor manera de localizar tu viaje...</p>
                 </div>
+                
+                <p class="text-center text-muted mt-4 small font-monospace">UGPS - La mejor manera de localizar tu viaje...</p>
             </div>
         </div>
-    </main>
+    </div>
 
-    <script type="module" src="./assets/js/validators.js"></script>
+    <script type="module" src="./assets/js/register.js"></script>
 </body>
 
 </html>
