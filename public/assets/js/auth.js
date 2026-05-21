@@ -1,33 +1,31 @@
 // js/auth.js
 import { auth, db } from './firebase.js';
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // 1. Registrar usuario y crear su documento en Firestore
-export async function registerUser(email, password, name) {
+// actualizada para recibir objetos
+export async function registerUser({ name, email, password, role = "client" }) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Guardar el documento en la colección 'users'
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: name,
             email: email,
-            role: "client",
+            role: role,
             createdAt: new Date().toISOString(),
             active: true
         });
 
-        console.log("Usuario registrado con éxito:", user.uid);
         return user;
     } catch (error) {
-        console.error("Error en registro:", error.code, error.message);
         throw error;
     }
 }
@@ -63,4 +61,42 @@ export function getCurrentUser(callback) {
             callback(null);
         }
     });
+}
+
+// 5. Muestra una alerta en el elemento con el id proporcionado
+export function showAlert(id, message) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = message;
+    el.classList.remove("d-none");
+}
+
+// 6. Oculta una alerta y limpia su contenido
+export function hideAlert(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("d-none");
+    el.textContent = "";
+}
+
+// 7. Cambia el estado del botón entre cargando y normal
+export function setButtonLoading(btn, isLoading, defaultHTML, loadingText) {
+    if (!btn) return;
+    btn.disabled = isLoading;
+    btn.innerHTML = isLoading
+        ? `<span class="spinner-border spinner-border-sm me-2"></span>${loadingText}`
+        : defaultHTML;
+}
+
+// 8. Traduce los códigos de error de Firebase a mensajes en español
+export function getFirebaseErrorMessage(error) {
+    const mensajes = {
+        "auth/email-already-in-use": "Este correo ya está registrado.",
+        "auth/invalid-email": "El correo no tiene un formato válido.",
+        "auth/weak-password": "La contraseña debe tener mínimo 6 caracteres.",
+        "auth/user-not-found": "No existe una cuenta con este correo.",
+        "auth/wrong-password": "Contraseña incorrecta.",
+        "auth/too-many-requests": "Demasiados intentos. Intenta más tarde."
+    };
+    return mensajes[error.code] || "Ocurrió un error. Intenta de nuevo.";
 }
