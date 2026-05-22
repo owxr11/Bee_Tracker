@@ -19,19 +19,19 @@ form?.addEventListener("submit", async (e) => {
 
 
     const validation = validateRegister(name, email, password, confirmPassword);
-    
- 
+
+
     if (!validation.isValid) {
-       
+
         showAlert("registerAlert", validation.message);
         return;
     }
 
     try {
         showLoader("registerBtn", "Creando cuenta...");
-        
-        await registerUser({ name, email, password });
-        
+
+        await registerUser({ name, email, password, role: "estudiante" });
+
         showAlert("registerSuccess", "Cuenta creada correctamente. Redirigiendo...");
         setTimeout(() => {
             window.location.href = "./login.html";

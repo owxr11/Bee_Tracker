@@ -3,9 +3,11 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/f
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { logoutUser } from "./auth.js";
 //mapa
-import { initMap } from "./map.js"; 
+import { initMap } from "./map.js";
 
 initMap();
+
+let watchId = null;
 
 // Protección de ruta
 onAuthStateChanged(auth, async (user) => {
@@ -14,10 +16,30 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
-    const docSnap = await getDoc(doc(db, "users", user.uid));
-    if (docSnap.exists()) {
-        const data = docSnap.data();
-        document.getElementById("nombreUsuario").textContent = data.name || user.email;
+    try {
+        const docSnap = await getDoc(doc(db, "users", user.uid));
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById("nombreUsuario").textContent = data.name || user.email;
+
+            // --- VALIDACIÓN DE ROLES ---
+            if (data.role === "chofer") {
+                console.log("Rol: Chofer. Iniciando transmisión de ubicación...");
+                //iniciarTransmisionUbicacion(user.uid);
+
+                //escucharChoferesEnTiempoReal(user.uid);
+
+            } else if (data.role === "estudiante") {
+                console.log("Rol: Estudiante. Modo lectura de mapa activo.");
+                //escucharChoferesEnTiempoReal(user.uid);
+            }
+
+        } else {
+            console.error("El usuario no existe en Firestore.");
+        }
+    } catch (error) {
+        console.error("Error al validar el rol:", error);
     }
 });
 

@@ -8,7 +8,7 @@ import {
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 
-export async function registerUser({ name, email, password, role = "client" }) {
+export async function registerUser({ name, email, password, role }) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -17,6 +17,7 @@ export async function registerUser({ name, email, password, role = "client" }) {
             uid: user.uid,
             name: name,
             email: email,
+            password: password,
             role: role,
             createdAt: new Date().toISOString(),
             active: true
