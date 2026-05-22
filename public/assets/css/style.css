@@ -261,3 +261,13 @@ body {
     transform: translateY(0);
     box-shadow: 0 4px 10px rgba(247, 219, 60, 0.25);
 }
+
+
+.uber-motion {
+    transition: margin-left 0.3s ease, margin-top 0.3s ease, transform 4.5s linear !important;
+}
+
+.leaflet-container { 
+    z-index: 1 !important; 
+    font-family: inherit;
+}
