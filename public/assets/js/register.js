@@ -29,13 +29,11 @@ form?.addEventListener("submit", async (e) => {
 
     try {
         showLoader("registerBtn", "Creando cuenta...");
-
-        await registerUser({ name, email, password, role: "estudiante" });
-
-        showAlert("registerSuccess", "Cuenta creada correctamente. Redirigiendo...");
+        await registerUser({ name, email, password });
+        showAlert("registerSuccess", "Cuenta creada. Revisa tu correo para verificarla.");
         setTimeout(() => {
-            window.location.href = "./login.html";
-        }, 1200);
+            window.location.href = "./verify_email.html";
+        }, 1500);
 
     } catch (error) {
         showAlert("registerAlert", getFirebaseErrorMessage(error));

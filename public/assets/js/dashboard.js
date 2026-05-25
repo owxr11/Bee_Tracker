@@ -9,6 +9,17 @@ initMap();
 
 let watchId = null;
 
+// Generar iniciales desde el nombre 
+function getInitials(name) {
+    return name
+        .trim()
+        .split(" ")
+        .filter(w => w.length > 0)
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join("");
+}
+
 // Protección de ruta
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -21,7 +32,9 @@ onAuthStateChanged(auth, async (user) => {
 
         if (docSnap.exists()) {
             const data = docSnap.data();
-            document.getElementById("nombreUsuario").textContent = data.name || user.email;
+            document.getElementById("avatarCircle").textContent = getInitials(data.name || user.email);
+            document.getElementById("sidebarName").textContent = data.name?.split(" ")[0] + " " + (data.name?.split(" ")[1]?.[0] || "") + ".";
+            document.getElementById("sidebarRole").textContent = data.role === "estudiante" ? "Alumno" : data.role === "chofer" ? "Chofer" : "Admin";
 
             // --- VALIDACIÓN DE ROLES ---
             if (data.role === "chofer") {
@@ -41,13 +54,13 @@ onAuthStateChanged(auth, async (user) => {
     } catch (error) {
         console.error("Error al validar el rol:", error);
     }
+
+    setTimeout(() => {
+        const splash = document.getElementById("splash-screen");
+        splash.classList.add("fade-out");
+    }, 1000);
+
 });
-
-setTimeout(() => {
-    const splash = document.getElementById("splash-screen");
-    splash.classList.add("fade-out");
-}, 1000);
-
 
 // Logout
 document.getElementById("btnLogout").addEventListener("click", async () => {

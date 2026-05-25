@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGPS - Mi Perfil</title>
+    <link rel="shortcut icon" href="./assets/img/logoUGPS.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="login-body d-flex align-items-center justify-content-center min-vh-100 p-3">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+                <div class="login-card p-4 p-sm-5">
+
+                    <!-- Avatar con iniciales -->
+                    <div class="text-center mb-4">
+                        <div id="avatarCircle"
+                            class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle fw-black"
+                            style="width:90px;height:90px;background-color:var(--ug-gold-bright);color:#1a1b1f;font-size:2rem;letter-spacing:1px;">
+                            --
+                        </div>
+                        <h2 id="profileName" class="fw-bold text-ug-gold-bright mb-0">Cargando...</h2>
+                        <span id="profileRole" class="badge mt-2 text-uppercase"
+                            style="background:rgba(247,219,60,0.15);color:var(--ug-gold-bright);font-size:11px;letter-spacing:1px;">
+                            --
+                        </span>
+                    </div>
+
+                    <!-- Alertas -->
+                    <div id="profileAlert" class="alert alert-danger d-none" role="alert"></div>
+                    <div id="profileSuccess" class="alert alert-success d-none" role="alert"></div>
+
+                    <!-- Info solo lectura -->
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white-50 small ms-1 fw-medium">NOMBRE COMPLETO</label>
+                        <div class="position-relative">
+                            <i class="bi bi-person input-group-icon"></i>
+                            <input type="text" class="form-control form-control-dark pe-5" id="profileNameInput"
+                                disabled>
+                            <button type="button" id="btnEditName"
+                                class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-2"
+                                style="background:transparent;color:var(--ug-gold-bright);border:none;">
+                                <i class="bi bi-pencil-square fs-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botón guardar nombre, oculto por default -->
+                    <div id="saveNameSection" class="d-grid mb-3 d-none">
+                        <button type="button" id="btnSaveName" class="btn btn-ug-gold w-100 transition-base">
+                            <i class="bi bi-floppy me-2"></i>Guardar nombre
+                        </button>
+                    </div>
+
+                    <div class="mb-4 text-start">
+                        <label class="form-label text-white-50 small ms-1 fw-medium">CORREO INSTITUCIONAL</label>
+                        <div class="position-relative">
+                            <i class="bi bi-envelope input-group-icon"></i>
+                            <input type="email" class="form-control form-control-dark" id="profileEmail" disabled>
+                        </div>
+                    </div>
+
+                    <!-- Botón cambiar contraseña -->
+                    <div class="d-grid mb-3">
+                        <button type="button" id="btnResetPassword" class="btn btn-ug-gold w-100 fs-5 transition-base"
+                            data-bs-toggle="modal" data-bs-target="#modalPassword">
+                            <i class="bi bi-key me-2"></i>Cambiar contraseña
+                        </button>
+                    </div>
+
+                    <!-- Volver -->
+                    <div class="text-center">
+                        <a href="./dashboard.html" class="text-white-50 small text-decoration-none hover-underline">
+                            <i class="bi bi-arrow-left me-1"></i>Volver al dashboard
+                        </a>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center">
+                        <small class="text-white-50 font-monospace login-footer-text">DICIS · Salamanca</small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cambiar contraseña -->
+    <div class="modal fade" id="modalPassword" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background:var(--sidebar-dark);border:1px solid rgba(255,255,255,0.1)">
+                <div class="modal-header border-secondary border-opacity-25">
+                    <h5 class="modal-title text-ug-gold-bright fw-bold">
+                        <i class="bi bi-key me-2"></i>Cambiar contraseña
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+
+                    <div id="modalAlert" class="alert alert-danger d-none" role="alert"></div>
+                    <div id="modalSuccess" class="alert alert-success d-none" role="alert"></div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white-50 small ms-1 fw-medium">CONTRASEÑA ACTUAL</label>
+                        <div class="position-relative">
+                            <i class="bi bi-lock input-group-icon"></i>
+                            <input type="password" class="form-control form-control-dark" id="currentPassword"
+                                placeholder="Tu contraseña actual" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white-50 small ms-1 fw-medium">NUEVA CONTRASEÑA</label>
+                        <div class="position-relative">
+                            <i class="bi bi-lock-fill input-group-icon"></i>
+                            <input type="password" class="form-control form-control-dark" id="newPassword"
+                                placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white-50 small ms-1 fw-medium">CONFIRMAR NUEVA CONTRASEÑA</label>
+                        <div class="position-relative">
+                            <i class="bi bi-shield-lock input-group-icon"></i>
+                            <input type="password" class="form-control form-control-dark" id="confirmNewPassword"
+                                placeholder="Repite la nueva contraseña" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer border-secondary border-opacity-25">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnConfirmPassword" class="btn btn-ug-gold fw-bold">
+                        <i class="bi bi-floppy me-2"></i>Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./assets/js/profile.js"></script>
+</body>
+
+</html>

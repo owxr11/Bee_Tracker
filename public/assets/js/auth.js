@@ -3,21 +3,24 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 
-export async function registerUser({ name, email, password, role }) {
+export async function registerUser({ name, email, password, role = "estudiante" }) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+
+        await sendEmailVerification(user);
 
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: name,
             email: email,
-            password: password,
+            //password: password,
             role: role,
             createdAt: new Date().toISOString(),
             active: true
@@ -25,6 +28,8 @@ export async function registerUser({ name, email, password, role }) {
 
         return user;
     } catch (error) {
+        console.log("Código:", error.code);
+        console.log("Mensaje:", error.message);
         throw error;
     }
 }
@@ -39,6 +44,7 @@ export async function loginUser(email, password) {
         throw error;
     }
 }
+
 
 export async function logoutUser() {
     try {

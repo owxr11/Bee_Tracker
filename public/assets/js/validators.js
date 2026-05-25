@@ -11,7 +11,7 @@ export function validateRegister(name, email, password, confirmPassword) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
         return { isValid: false, message: "El correo no tiene un formato válido." };
 
-    
+
     if (!email.endsWith(".ugto.mx") && !email.endsWith("@ugto.mx")) {
         return { isValid: false, message: "Debes registrarte con un correo institucional de la UG." };
     }
