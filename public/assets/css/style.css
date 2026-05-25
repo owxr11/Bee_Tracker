@@ -1,5 +1,4 @@
 :root {
-
     --sidebar-dark: rgba(26, 27, 31, 0.9) !important;
     --ug-gold-bright: #f7db3c;
     --ug-blue-muted: #4e6a88;
@@ -13,45 +12,35 @@
     --ci-border: #e5e7eb;
 }
 
+/* --- Utilidades y Colores --- */
+.bg-sidebar-dark { background-color: var(--sidebar-dark) !important; }
+.text-ug-gold-bright { color: var(--ug-gold-bright) !important; }
+.text-col-dark { color: var(--sidebar-dark) !important; }
+.bg-ug-gold-bright { background-color: var(--ug-gold-bright) !important; }
+.bg-ug-blue-muted { background-color: var(--ug-blue-muted) !important; }
+.bg-ug-gold-dark { background-color: var(--ug-gold-dark) !important; }
+.bg-ug-hover { background-color: rgba(248, 239, 166, 0.05) !important; }
 
-.bg-sidebar-dark {
-    background-color: var(--sidebar-dark) !important;
-}
-
-.text-ug-gold-bright {
+/* --- Utilidades de Transición (Recuperadas) --- */
+.transition-base { transition: all 0.2s ease-in-out; }
+.transition-fade { transition: opacity 0.2s ease, visibility 0.2s ease; }
+.fw-black { font-weight: 900 !important; }
+.fs-small { font-size: 0.8rem; }
+.hover-gold:hover {
     color: var(--ug-gold-bright) !important;
+    transform: translateX(3px);
+    transition: all 0.2s ease;
+    filter: drop-shadow(0 0 5px rgba(255, 242, 125, 0.5)); 
 }
 
-.text-col-dark {
-    color: var(--sidebar-dark) !important;
-}
-
-.bg-ug-gold-bright {
-    background-color: var(--ug-gold-bright) !important;
-}
-
-.bg-ug-blue-muted {
-    background-color: var(--ug-blue-muted) !important;
-}
-
-.bg-ug-gold-dark {
-    background-color: var(--ug-gold-dark) !important;
-}
-
-.bg-ug-hover {
-    background-color: rgba(248, 239, 166, 0.05) !important;
-}
-
-
+/* --- AUTH Y LOGIN --- */
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--ci-text);
     background-color: var(--ci-bg);
 }
 
-.auth-page {
-    min-height: 100vh;
-}
+.auth-page { min-height: 100vh; }
 
 .auth-wrapper {
     background:
@@ -90,9 +79,7 @@ body {
     border-color: rgba(78, 106, 136, 0.5);
 }
 
-.btn {
-    border-radius: 0.9rem;
-}
+.btn { border-radius: 0.9rem; }
 
 .btn-primary {
     background-color: var(--ci-primary);
@@ -104,14 +91,12 @@ body {
     border-color: var(--ci-primary-dark);
 }
 
-
 .auth-image-panel {
     background-color: rgba(255, 255, 255, 0.01) !important;
     border-right: 1px solid rgba(247, 219, 60, 0.15) !important;
     position: relative;
     z-index: 1;
 }
-
 
 .login-logo-huge {
     width: 75% !important;   
@@ -122,26 +107,10 @@ body {
     border-radius: 2rem !important; 
 }
 
-.fw-black {
-    font-weight: 900 !important;
-}
-
-.tracking-wide {
-    letter-spacing: 1.5px !important;
-}
-
-
-.tracking-wide-lg {
-    letter-spacing: 4px !important;
-}
-
-.text-white-70 {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.text-white-85 {
-    color: rgba(255, 255, 255, 0.85) !important;
-}
+.tracking-wide { letter-spacing: 1.5px !important; }
+.tracking-wide-lg { letter-spacing: 4px !important; }
+.text-white-70 { color: rgba(255, 255, 255, 0.7) !important; }
+.text-white-85 { color: rgba(255, 255, 255, 0.85) !important; }
 
 .italic-quote {
     font-style: italic;
@@ -154,22 +123,12 @@ body {
     color: #e5cb30 !important;
 }
 
-@media (max-width: 767.98px) {
-    .auth-image-panel {
-        border-right: none !important;
-        border-bottom: 1px solid rgba(247, 219, 60, 0.15) !important;
-    }
-}
-
-/* login */
-
 .login-body {
-    background-color: #292b2e !important; /* Contraste profundo para el fondo */
+    background-color: #292b2e !important; 
     color: #ffffff;
     font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Contenedor tipo Tarjeta de Cristal */
 .login-card {
     background: var(--sidebar-dark) !important; 
     backdrop-filter: blur(16px) saturate(120%);
@@ -180,49 +139,35 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-card:hover {
-    box-shadow: 0 25px 60px rgba(247, 219, 60, 0.05);
-}
+.login-card:hover { box-shadow: 0 25px 60px rgba(247, 219, 60, 0.05); }
 
-/* Ajustes de tipografía y logos */
 .login-logo {
     width: 100px;
     height: 100px;
     object-fit: cover;
 }
 
-.login-subtitle {
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-}
-
-.login-footer-text {
-    font-size: 0.65rem;
-    letter-spacing: 0.5px;
-}
-
+.login-subtitle { letter-spacing: 2px; font-size: 0.8rem; }
+.login-footer-text { font-size: 0.65rem; letter-spacing: 0.5px; }
 
 .form-control-dark {
     background-color: rgba(255, 255, 255, 0.04) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     color: #ffffff !important;
     border-radius: 14px !important;
-    padding: 14px 16px 14px 44px !important; /* Desplazamiento por el icono */
+    padding: 14px 16px 14px 44px !important; 
     font-size: 0.95rem;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.form-control-dark::placeholder {
-    color: rgba(255, 255, 255, 0.3) !important;
-}
+.form-control-dark::placeholder { color: rgba(255, 255, 255, 0.3) !important; }
 
 .form-control-dark:focus {
     background-color: rgba(255, 255, 255, 0.07) !important;
-    border-color: var(--ug-gold-bright) !important; /* #f7db3c */
+    border-color: var(--ug-gold-bright) !important; 
     box-shadow: 0 0 0 4px rgba(247, 219, 60, 0.12) !important;
 }
 
-/* Iconos integrados en las cajas de texto */
 .input-group-icon {
     position: absolute;
     left: 16px;
@@ -234,12 +179,8 @@ body {
     transition: color 0.25s ease;
 }
 
-/* Iluminación de icono en foco */
-.position-relative:focus-within .input-group-icon {
-    color: var(--ug-gold-bright);
-}
+.position-relative:focus-within .input-group-icon { color: var(--ug-gold-bright); }
 
-/* Botón de acción Premium */
 .btn-ug-gold {
     background-color: var(--ug-gold-bright) !important;
     color: #1a1b1f !important;
@@ -262,12 +203,225 @@ body {
     box-shadow: 0 4px 10px rgba(247, 219, 60, 0.25);
 }
 
+/* --- DASHBOARD Y MAPA --- */
+.uber-motion { transition: margin-left 0.3s ease, margin-top 0.3s ease, transform 4.5s linear !important; }
+.leaflet-container { z-index: 1 !important; font-family: inherit; }
 
-.uber-motion {
-    transition: margin-left 0.3s ease, margin-top 0.3s ease, transform 4.5s linear !important;
+/* ESTRUCTURA DEL SIDEBAR (Escritorio - Recuperado) */
+.sidebar {
+    width: 110px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+    overflow-x: hidden;
+    white-space: nowrap;
 }
 
-.leaflet-container { 
-    z-index: 1 !important; 
-    font-family: inherit;
+.sidebar:hover {
+    width: 300px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition-delay: 0.15s;
+}
+
+.sidebar .bi { font-size: 1.5rem !important; min-width: 35px; }
+.sidebar .logo-img { width: 65px; height: 65px; object-fit: cover; }
+
+.sidebar:hover .transition-fade {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition-delay: 0.1s;
+}
+
+.logo-text { filter: drop-shadow(0 0 5px rgba(255, 242, 125, 0.5)); }
+
+/* PANTALLA DE CARGA / SPLASH SCREEN (Recuperado) */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background-color: var(--sidebar-dark);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
+}
+
+.splash-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    animation: pulse-splash 1.2s infinite alternate ease-in-out;
+    transition: transform 0.7s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+@keyframes pulse-splash {
+    0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(247, 219, 60, 0.2)); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(247, 219, 60, 0.6)); }
+}
+
+.splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; 
+}
+
+.splash-screen.fade-out .splash-logo {
+    transform: scale(8);
+    opacity: 0;
+}
+
+/* --- RESPONSIVE DESIGN (APP MÓVIL) --- */
+@media (max-width: 768px) {
+    .auth-image-panel {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(247, 219, 60, 0.15) !important;
+    }
+
+    main {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100dvh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        background: transparent !important;
+    }
+
+    #mapa {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100dvh !important;
+        border-radius: 0 !important;
+        z-index: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .leaflet-container { width: 100% !important; height: 100% !important; }
+    html, body { padding: 0 !important; margin: 0 !important; }
+    .d-flex.vh-100 {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .sidebar { background: transparent !important; border: none !important; position: static; }
+    .sidebar > a {
+        position: fixed !important;
+        top: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%);
+        width: auto !important;
+        min-width: 180px;
+        z-index: 1100;
+        background-color: rgba(26, 27, 31, 0.9) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 242, 125, 0.2) !important;
+        border-radius: 30px !important;
+        padding: 10px 20px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px;
+    }
+    .sidebar .logo-container {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sidebar .logo-img { width: 40px !important; height: 40px !important; }
+    .logo-text { font-size: 1.2rem !important; line-height: 1; }
+    .sidebar .logo-container span:last-child { font-size: 0.6rem !important; }
+
+    .sidebar ul.nav {
+        position: fixed !important;
+        bottom: 25px !important;
+        left: 50% !important;
+        transform: translateX(-50%);
+        width: 85% !important;
+        max-width: 360px;
+        height: 65px !important;
+        background-color: rgba(26, 27, 31, 0.9) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 25px !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center;
+        padding: 0 20px !important;
+        z-index: 1100;
+        margin: 0 !important;
+    }
+    .nav-link {
+        padding: 10px !important;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.6) !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-link.active {
+        color: var(--ug-gold-bright) !important;
+        border: none !important;
+        border-bottom: 3px solid var(--ug-gold-bright) !important;
+        border-radius: 0 !important;
+    }
+
+    #modalDetallesRuta {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        pointer-events: none;
+        z-index: 1090 !important;
+    }
+    .modal-abs-top {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 110px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: 90vw !important;
+        max-width: 360px !important;
+        margin: 0 !important;
+        z-index: 1091 !important;
+        pointer-events: auto;
+        transition: opacity 0.3s ease, bottom 0.3s ease;
+        opacity: 0;
+    }
+    #modalDetallesRuta.show .modal-abs-top {
+        opacity: 1 !important;
+        bottom: 110px !important;
+        transform: translateX(-50%) !important;
+    }
+    .modal-content {
+        background-color: white !important;
+        border: none !important;
+        border-radius: 20px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .sidebar hr, .sidebar .nav-text, .sidebar .mt-auto, .sidebar .user-section-wrapper { display: none !important; }
 }

@@ -43,6 +43,12 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
+setTimeout(() => {
+    const splash = document.getElementById("splash-screen");
+    splash.classList.add("fade-out");
+}, 1000);
+
+
 // Logout
 document.getElementById("btnLogout").addEventListener("click", async () => {
     await logoutUser();

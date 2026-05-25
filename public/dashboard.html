@@ -1,37 +1,184 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UGPS - Dashboard</title>
     <link rel="shortcut icon" href="./assets/img/logoUGPS.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="bg-bee-background d-flex flex-column vh-100">
+<body class="bg-light overflow-hidden">
 
-    <nav class="navbar bg-sidebar-dark shadow-sm z-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span class="fw-bold text-ug-gold-bright fs-5">Base Proyect</span>
-            <div class="d-flex align-items-center gap-3">
-                <span class="text-white">Hola, <strong class="text-ug-gold-bright" id="nombreUsuario">Usuario</strong></span>
-                <button class="btn btn-sm bg-ug-gold-bright fw-bold" id="btnLogout">Cerrar sesión</button>
+    <div id="splash-screen" class="splash-screen">
+        <img src="./assets/img/logoUGPSsf.png" alt="Logo UGPS" class="splash-logo">
+    </div>
+
+    <div class="d-flex vh-100">
+
+        <nav class="sidebar d-flex flex-column flex-shrink-0 py-4 px-3 text-white-50 bg-sidebar-dark"
+            style="z-index: 10;">
+
+            <a href="#"
+                class="d-flex align-items-center mt-2 p-2 w-100 rounded-3 text-decoration-none bg-ug-hover transition-base overflow-hidden">
+                <img src="./assets/img/logoUGPS.png" alt="Logo UGPS" class="rounded-3 logo-img flex-shrink-0"
+                    style="width: 55px; height: 55px; object-fit: cover;">
+                <div class="logo-container ms-3 d-flex flex-column opacity-0 invisible transition-fade">
+                    <span class="logo-text fs-2 fw-black lh-1 text-ug-gold-bright">UGPS</span>
+                    <span class="fw-light text-white-50 text-uppercase"
+                        style="letter-spacing: 1.5px; font-size: 0.75rem;">Bee Tracker</span>
+                </div>
+            </a>
+
+            <hr class="border-secondary my-4">
+
+            <ul class="nav nav-pills flex-column mb-auto gap-3 w-100">
+                <li class="nav-item">
+                    <a href="#" id="linkRutasActivas"
+                        class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
+                        <i class="bi bi-truck text-center"></i>
+                        <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">Rutas Activas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="linkHorarios" data-bs-toggle="modal" data-bs-target="#modalHorarios"
+                        class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
+                        <i class="bi bi-clock-history text-center"></i>
+                        <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">Horarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
+                        <i class="bi bi-bell text-center"></i>
+                        <span
+                            class="nav-text ms-3 d-flex justify-content-between align-items-center w-100 fs-5 opacity-0 invisible transition-fade">
+                            Notificaciones
+                            <span class="badge bg-ug-gold-bright text-dark rounded-pill fs-6">3</span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Avatar del usuario con iniciales -->
+            <div class="mt-auto pt-3">
+                <a href="./profile.html"
+                    class="d-flex align-items-center p-2 w-100 rounded-3 text-decoration-none bg-ug-hover transition-base overflow-hidden">
+                    <div id="avatarCircle"
+                        class="rounded-3 flex-shrink-0 d-flex align-items-center justify-content-center fw-black"
+                        style="width:55px;height:55px;background-color:var(--ug-gold-bright);color:#1a1b1f;font-size:1.2rem;letter-spacing:1px;">
+                        --
+                    </div>
+                    <div
+                        class="mx-3 d-flex align-items-center justify-content-between flex-grow-1 opacity-0 invisible transition-fade">
+                        <div class="overflow-hidden">
+                            <h6 id="sidebarName" class="mb-0 text-white fw-bold text-truncate"
+                                style="font-size: 0.9rem;">Cargando...</h6>
+                            <small id="sidebarRole" class="text-ug-gold-bright text-uppercase fw-light"
+                                style="font-size: 0.7rem; letter-spacing: 1.5px;">--</small>
+                        </div>
+                        <div id="btnLogout" class="ms-2 btn-logout text-white-50 hover-gold">
+                            <i class="bi bi-box-arrow-right fs-5"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="flex-grow-1 position-relative p-3">
-        <div id="mapa" class="w-100 h-100 rounded-4 shadow-lg z-1"></div>
-    </main>
+        <main class="d-flex flex-column flex-grow-1 position-relative p-3 bg-sidebar-dark">
+            <div id="mapa" class="w-100 h-100 rounded-4 shadow-lg overflow-hidden z-1"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+            <div class="modal fade" id="modalDetallesRuta" tabindex="-1" data-bs-backdrop="false"
+                style="pointer-events: none;" aria-hidden="true">
+                <div class="modal-dialog modal-abs-top" style="pointer-events: auto;">
+                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                        <div class="modal-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold mb-0 text-dark">Detalles de Ruta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="mb-4">
+                                <span
+                                    class="badge bg-ug-gold-bright text-dark rounded-pill px-3 py-2 fw-bold shadow-sm">
+                                    <span class="spinner-grow spinner-grow-sm me-1" role="status"></span>
+                                    En tránsito
+                                </span>
+                            </div>
+                            <div class="timeline border-start border-2 ms-2 ps-3 py-1"
+                                style="border-color: var(--ug-gold-bright) !important;">
+                                <div class="mb-3 position-relative">
+                                    <div class="position-absolute bg-ug-gold-bright rounded-circle"
+                                        style="width: 10px; height: 10px; left: -22px; top: 5px;"></div>
+                                    <h6 class="fw-bold mb-0 text-dark">DICIS</h6>
+                                    <small class="text-muted">Punto de partida</small>
+                                </div>
+                                <div class="position-relative">
+                                    <div class="position-absolute bg-ug-blue-muted rounded-circle"
+                                        style="width: 10px; height: 10px; left: -22px; top: 5px;"></div>
+                                    <h6 class="fw-bold mb-0 text-dark">ENMS. Salamanca</h6>
+                                    <small class="text-muted">Destino actual</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalHorarios" tabindex="-1" data-bs-backdrop="false"
+                style="pointer-events: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="pointer-events: auto;">
+                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden bg-sidebar-dark text-white">
+                        <div class="modal-header border-secondary border-opacity-25 p-4">
+                            <div>
+                                <h4 class="fw-bold mb-0 text-ug-gold-bright">Horarios del Camión</h4>
+                                <small class="text-white-50">Semestre Enero-Junio 2026</small>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <ul class="nav nav-pills nav-fill mb-4 custom-tabs" id="horariosTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active rounded-pill fw-bold" id="ascenso-tab"
+                                        data-bs-toggle="tab" data-bs-target="#ascenso" type="button" role="tab">Hacia
+                                        DICIS</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link rounded-pill fw-bold" id="descenso-tab" data-bs-toggle="tab"
+                                        data-bs-target="#descenso" type="button" role="tab">Hacia ENMS 2</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="horariosTabContent">
+                                <div class="tab-pane fade show active" id="ascenso" role="tabpanel">
+                                    <h6 class="text-white-50 mb-3 border-bottom border-secondary pb-2"><i
+                                            class="bi bi-geo-alt text-ug-gold-bright me-2"></i>Desde ENMS 2 a DICIS</h6>
+                                    <div class="d-flex flex-wrap gap-2 mb-4" id="lista-ascenso"></div>
+                                    <h6 class="text-white-50 mb-3 border-bottom border-secondary pb-2 mt-4"><i
+                                            class="bi bi-signpost-split text-ug-gold-bright me-2"></i>Paradas Especiales
+                                    </h6>
+                                    <div class="d-flex flex-column gap-2 mb-4" id="lista-especiales"></div>
+                                </div>
+                                <div class="tab-pane fade" id="descenso" role="tabpanel">
+                                    <h6 class="text-white-50 mb-3 border-bottom border-secondary pb-2"><i
+                                            class="bi bi-geo-alt text-ug-gold-bright me-2"></i>De DICIS a ENMS 2</h6>
+                                    <div class="d-flex flex-wrap gap-2 mb-4" id="lista-descenso"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <script type="module" src="assets/js/map.js"></script>
-    <script type="module" src="assets/js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.min.js"></script>
+    <script type="module" src="./assets/js/dashboard.js"></script>
 </body>
 
 </html>
