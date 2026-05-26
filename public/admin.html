@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGPS - Panel Admin</title>
+    <link rel="shortcut icon" href="./assets/img/logoUGPSsf.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="login-body d-flex flex-column min-vh-100">
+
+    <nav class="navbar py-3 border-bottom border-secondary border-opacity-25 z-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            
+            <div class="d-flex align-items-center gap-2">
+                <img src="./assets/img/logoUGPSsf.png" alt="Logo UGPS" class="bg-gray rounded-3 p-1 admin-nav-logo">
+                <span class="fw-bold text-ug-gold-bright fs-5 ms-2 mb-0 tracking-wide">UGPS</span>
+                <span class="text-white-50 small fw-bold ms-2 mt-1 tracking-wide">PANEL ADMIN</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center px-3 py-1 rounded-pill admin-user-pill">
+                    <i class="bi bi-shield-lock-fill text-ug-gold-bright me-2"></i>
+                    <span class="text-white-50 small">Hola, <strong class="text-white" id="adminName">Cargando...</strong></span>
+                </div>
+                <button class="btn btn-sm rounded-pill px-3 py-2 btn-logout-red" id="btnLogout">
+                    <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1 container py-5">
+        
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <p class="text-ug-gold-bright fw-bold tracking-wide small mb-1">ADMINISTRACIÓN</p>
+                <h2 class="fw-bold text-white mb-0">Gestión de Usuarios</h2>
+            </div>
+            <button class="btn btn-ug-gold fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#modalChofer">
+                <i class="bi bi-person-plus-fill me-2"></i>Agregar Chofer
+            </button>
+        </div>
+
+        <div class="row g-4 mb-5" id="kpiCards">
+            <div class="col-md-4">
+                <div class="login-card p-4 h-100 d-flex align-items-center gap-4">
+                    <div class="rounded-4 d-flex align-items-center justify-content-center kpi-icon-box bg-gold-light">
+                        <i class="bi bi-people-fill fs-3 text-ug-gold-bright"></i>
+                    </div>
+                    <div>
+                        <p class="text-white-50 fw-bold tracking-wide small mb-1" style="font-size: 0.75rem;">TOTAL USUARIOS</p>
+                        <h2 class="fw-bold text-white mb-0" id="kpiTotal">-</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="login-card p-4 h-100 d-flex align-items-center gap-4">
+                    <div class="rounded-4 d-flex align-items-center justify-content-center kpi-icon-box bg-gold-light">
+                        <i class="bi bi-bus-front-fill fs-3 text-ug-gold-bright"></i>
+                    </div>
+                    <div>
+                        <p class="text-white-50 fw-bold tracking-wide small mb-1" style="font-size: 0.75rem;">CHOFERES ACTIVOS</p>
+                        <h2 class="fw-bold text-white mb-0" id="kpiChoferes">-</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="login-card p-4 h-100 d-flex align-items-center gap-4">
+                    <div class="rounded-4 d-flex align-items-center justify-content-center kpi-icon-box bg-danger-light">
+                        <i class="bi bi-person-slash fs-3 text-danger"></i>
+                    </div>
+                    <div>
+                        <p class="text-white-50 fw-bold tracking-wide small mb-1" style="font-size: 0.75rem;">CUENTAS INACTIVAS</p>
+                        <h2 class="fw-bold text-white mb-0" id="kpiInactivos">-</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-card p-0 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-hover custom-table mb-0 align-middle">
+                    <thead>
+                        <tr>
+                            <th class="py-4 ps-5 border-0">Nombre</th>
+                            <th class="py-4 border-0">Correo</th>
+                            <th class="py-4 text-center border-0">Rol</th>
+                            <th class="py-4 text-center border-0">Estado</th> 
+                            <th class="py-4 text-center border-0 pe-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaUsuarios">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalChofer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-card border-0 text-white">
+                <div class="modal-header border-bottom border-secondary border-opacity-25 p-4">
+                    <h5 class="modal-title fw-bold text-ug-gold-bright">
+                        <i class="bi bi-person-plus-fill me-2"></i>Registrar Chofer
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="adminAlert" class="alert alert-danger d-none" role="alert"></div>
+                    <form id="formChofer" autocomplete="off">
+                        <div class="mb-4 position-relative text-start">
+                            <label class="form-label text-white-50 small ms-1 fw-medium">NOMBRE COMPLETO</label>
+                            <div class="position-relative">
+                                <i class="bi bi-person input-group-icon"></i>
+                                <input type="text" class="form-control form-control-dark" id="choferName" placeholder="Ej. Juan Pérez" required>
+                            </div>
+                        </div>
+                        <div class="mb-4 position-relative text-start">
+                            <label class="form-label text-white-50 small ms-1 fw-medium">CORREO ELECTRÓNICO</label>
+                            <div class="position-relative">
+                                <i class="bi bi-envelope input-group-icon"></i>
+                                <input type="email" class="form-control form-control-dark" id="choferEmail" placeholder="chofer@correo.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-4 position-relative text-start">
+                            <label class="form-label text-white-50 small ms-1 fw-medium">CONTRASEÑA ASIGNADA</label>
+                            <div class="position-relative">
+                                <i class="bi bi-lock input-group-icon"></i>
+                                <input type="password" class="form-control form-control-dark" id="choferPassword" placeholder="Mínimo 6 caracteres" required>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-ug-gold fw-bold py-3 fs-5" id="btnCrearChofer">
+                                <i class="bi bi-floppy-fill me-2"></i>Crear cuenta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditUser" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-card border-0 text-white">
+                <div class="modal-header border-bottom border-secondary border-opacity-25 p-4">
+                    <h5 class="modal-title fw-bold text-ug-gold-bright">
+                        <i class="bi bi-pencil-square me-2"></i>Editar Usuario
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formEditUser">
+                        <input type="hidden" id="editUid"> 
+                        <div class="mb-4 position-relative text-start">
+                            <label class="form-label text-white-50 small ms-1 fw-medium">NOMBRE COMPLETO</label>
+                            <div class="position-relative">
+                                <i class="bi bi-person input-group-icon"></i>
+                                <input type="text" class="form-control form-control-dark" id="editName" required>
+                            </div>
+                        </div>
+                        <div class="mb-4 position-relative text-start">
+                            <label class="form-label text-white-50 small ms-1 fw-medium">CORREO ELECTRÓNICO</label>
+                            <div class="position-relative">
+                                <i class="bi bi-envelope input-group-icon"></i>
+                                <input type="email" class="form-control form-control-dark" id="editEmail" required>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-ug-gold fw-bold py-3 fs-5" id="btnSaveEdit">
+                                <i class="bi bi-check-circle-fill me-2"></i>Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/admin.js"></script>
+</body>
+
+</html>

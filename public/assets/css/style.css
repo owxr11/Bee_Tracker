@@ -274,6 +274,61 @@ body {
     opacity: 0;
 }
 
+/*panel admin*/
+.btn-logout-red {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-logout-red:hover {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+.custom-table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #fff;
+    --bs-table-border-color: rgba(255, 255, 255, 0.1);
+}
+.custom-table thead th {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--ug-gold-bright);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(247, 219, 60, 0.2);
+}
+.custom-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.admin-nav-logo {
+    width: 45px; 
+    height: 45px; 
+    object-fit: contain;
+}
+.admin-user-pill {
+    background-color: rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kpi-icon-box {
+    width: 65px; 
+    height: 65px;
+}
+.bg-gold-light {
+    background-color: rgba(247, 219, 60, 0.1);
+}
+.bg-danger-light {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+
 /* --- RESPONSIVE DESIGN (APP MÓVIL) --- */
 @media (max-width: 768px) {
     .auth-image-panel {

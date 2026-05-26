@@ -48,6 +48,20 @@ onAuthStateChanged(auth, async (user) => {
                 //escucharChoferesEnTiempoReal(user.uid);
             }
 
+            if (data.role ==="admin") {
+                const sidebar =document.querySelector(".nav.nav-pills");
+                const li = document.createElement("li");
+                li.className = "nav-item mt-2";
+                li.innerHTML = `
+                   <a href="admin.html" class="nav-link d-flex align-items-center p-3 transition-base">
+                        <i class="bi bi-shield-lock-fill text-ug-gold-bright text-center"></i>
+                        <span class="nav-text ms-3 fs-5 text-ug-gold-bright fw-bold opacity-0 invisible transition-fade">Panel Admin</span>
+                    </a>
+                `;
+
+                sidebar.appendChild(li);
+            }
+
         } else {
             console.error("El usuario no existe en Firestore.");
         }
