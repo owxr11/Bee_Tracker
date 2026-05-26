@@ -4,6 +4,9 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
 import { logoutUser } from "./auth.js";
 //mapa
 import { initMap } from "./map.js";
+// --- Nuevas importaciones de ubicación ---
+import { iniciarTransmisionUbicacion } from "./location.js";
+import { escucharChoferesEnTiempoReal } from "./realtime.js";
 
 initMap();
 
@@ -39,13 +42,15 @@ onAuthStateChanged(auth, async (user) => {
             // --- VALIDACIÓN DE ROLES ---
             if (data.role === "chofer") {
                 console.log("Rol: Chofer. Iniciando transmisión de ubicación...");
-                //iniciarTransmisionUbicacion(user.uid);
+                // 1. El chofer ENVIARÁ su ubicación usando el GPS del celular
+                iniciarTransmisionUbicacion(user.uid);
+                // 2. También debe ESCUCHAR para verse a sí mismo moverse en su propio mapa
+                escucharChoferesEnTiempoReal();
 
-                //escucharChoferesEnTiempoReal(user.uid);
-
-            } else if (data.role === "estudiante") {
-                console.log("Rol: Estudiante. Modo lectura de mapa activo.");
-                //escucharChoferesEnTiempoReal(user.uid);
+            } else if (data.role === "estudiante" || data.role === "admin") {
+                console.log(`Rol: ${data.role}. Modo lectura de mapa activo.`);
+                // 3. El estudiante y el admin NO transmiten, SOLO ESCUCHAN dónde están los choferes
+                escucharChoferesEnTiempoReal();
             }
 
             if (data.role ==="admin") {
