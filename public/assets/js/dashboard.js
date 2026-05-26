@@ -27,6 +27,11 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
+    if (!user.emailVerified) {
+        window.location.href = "verify_email.html";
+        return;
+    }
+
     try {
         const docSnap = await getDoc(doc(db, "users", user.uid));
 
