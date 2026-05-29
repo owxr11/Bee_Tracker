@@ -40,3 +40,13 @@ export function validateLogin(email, password) {
 
     return { isValid: true, message: null };
 }
+
+export function validateForgotPassword(email) {
+    if (!email)
+        return { isValid: false, message: "El correo es obligatorio." };
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+        return { isValid: false, message: "El correo no tiene un formato válido." };
+
+    return { isValid: true, message: "" };
+}

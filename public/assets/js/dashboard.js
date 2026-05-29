@@ -30,6 +30,11 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
+    /*     if (!user.emailVerified) {
+            window.location.href = "verify_email.html";
+            return;
+        } */
+
     try {
         const docSnap = await getDoc(doc(db, "users", user.uid));
 
@@ -53,8 +58,8 @@ onAuthStateChanged(auth, async (user) => {
                 escucharChoferesEnTiempoReal();
             }
 
-            if (data.role ==="admin") {
-                const sidebar =document.querySelector(".nav.nav-pills");
+            if (data.role === "admin") {
+                const sidebar = document.querySelector(".nav.nav-pills");
                 const li = document.createElement("li");
                 li.className = "nav-item mt-2";
                 li.innerHTML = `
