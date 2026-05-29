@@ -1,24 +1,28 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UGPS - Iniciar Sesión</title>
     <link rel="shortcut icon" href="./assets/img/logoUGPS.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body class="login-body d-flex align-items-center justify-content-center vh-100 p-3">
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-sm-8 col-md-6 col-lg-4">
-                
+
                 <div class="login-card p-4 p-sm-5 text-center">
-                    
+
                     <div class="mb-3">
-                        <img src="./assets/img/logoUGPS.png" alt="Logo UGPS" class="login-logo img-fluid rounded-4 shadow">
+                        <img src="./assets/img/logoUGPS.png" alt="Logo UGPS"
+                            class="login-logo img-fluid rounded-4 shadow">
                     </div>
 
                     <h2 class="fw-bold mb-1 text-ug-gold-bright">UGPS</h2>
@@ -26,28 +30,41 @@
 
                     <form id="loginForm" autocomplete="off">
                         <div class="mb-4 position-relative text-start">
-                            <label for="userEmail" class="form-label text-white-50 small ms-1 fw-medium">Correo Institucional</label>
+                            <label for="userEmail" class="form-label text-white-50 small ms-1 fw-medium">Correo
+                                Institucional</label>
                             <div class="position-relative">
                                 <i class="bi bi-envelope input-group-icon"></i>
-                                <input type="email" class="form-control form-control-dark" id="userEmail" placeholder="ejemplo@ugto.mx" required>
+                                <input type="email" class="form-control form-control-dark" id="userEmail"
+                                    placeholder="ejemplo@ugto.mx" required>
                             </div>
                         </div>
 
                         <div class="mb-4 position-relative text-start">
-                            <label for="userPassword" class="form-label text-white-50 small ms-1 fw-medium">Contraseña</label>
+                            <label for="userPassword"
+                                class="form-label text-white-50 small ms-1 fw-medium">Contraseña</label>
                             <div class="position-relative">
                                 <i class="bi bi-lock input-group-icon"></i>
-                                <input type="password" class="form-control form-control-dark" id="userPassword" placeholder="••••••••" required>
+                                <input type="password" class="form-control form-control-dark" id="userPassword"
+                                    placeholder="••••••••" required>
                             </div>
                         </div>
 
                         <div class="mb-4 text-center">
-                            <small class="text-white-50">¿No tienes cuenta? <a href="./register.html" class="text-ug-gold-bright text-decoration-none hover-underline">Regístrate aquí</a></small>
+                            <small class="text-white-50">¿No tienes cuenta? <a href="./register.html"
+                                    class="text-ug-gold-bright text-decoration-none hover-underline">Regístrate
+                                    aquí</a></small>
                         </div>
 
                         <button type="submit" class="btn btn-ug-gold w-100 fs-5 transition-base">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
                         </button>
+
+                        <div class="mb-4 text-center">
+                            <a href="./forgot_password.html"
+                                class="text-white-50 small text-decoration-none hover-underline">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
                     </form>
 
                     <div class="mt-5 pt-2 border-top border-secondary border-opacity-25">
@@ -60,7 +77,10 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
     <script type="module" src="./assets/js/login.js"></script>
 </body>
+
 </html>

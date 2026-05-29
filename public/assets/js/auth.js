@@ -4,7 +4,8 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
-    sendEmailVerification
+    sendEmailVerification,
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -98,4 +99,13 @@ export function getFirebaseErrorMessage(error) {
         "auth/too-many-requests": "Demasiados intentos. Intenta más tarde."
     };
     return mensajes[error.code] || "Ocurrió un error. Intenta de nuevo.";
+}
+
+// Enviar correo para restablecer contraseña
+export async function resetPassword(email) {
+    try {
+        await sendPasswordResetEmail(auth, email);
+    } catch (error) {
+        throw error;
+    }
 }
