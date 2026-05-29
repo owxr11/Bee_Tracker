@@ -6,91 +6,10 @@ import { initMap } from "./map.js";
 import { iniciarTransmisionUbicacion } from "./location.js";
 import { escucharChoferesEnTiempoReal } from "./realtime.js";
 
-// ==========================================
-// INICIALIZAR MAPA
-// ==========================================
 initMap();
 
 let watchId = null;
 
-// ==========================================
-// ESTILOS DEL MODAL DE HORARIOS
-// (Inyectados por JS para no tocar style.css)
-// ==========================================
-const estilosHorarios = document.createElement("style");
-estilosHorarios.textContent = `
-    /* Grid de 3 columnas para los horarios */
-    #lista-ascenso,
-    #lista-descenso {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-
-    /* Badge base */
-    .time-badge {
-        background-color: #2a2b30;
-        color: #cccccc;
-        border-radius: 12px;
-        padding: 14px 8px;
-        text-align: center;
-        font-size: 0.95rem;
-        font-weight: 500;
-        cursor: default;
-        transition: background 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        line-height: 1.2;
-    }
-
-    /* Próximo camión — resaltado dorado */
-    .time-badge.next-bus {
-        background-color: var(--ug-gold-bright, #FFD000);
-        color: #1a1b1f;
-        font-weight: 800;
-        font-size: 1rem;
-    }
-
-    /* Punto animado dentro del badge próximo */
-    .time-badge.next-bus .live-dot {
-        width: 8px;
-        height: 8px;
-        min-width: 8px;
-        background-color: #1a1b1f;
-        border-radius: 50%;
-        display: inline-block;
-        animation: pulse-dot 1.4s infinite;
-    }
-
-    @keyframes pulse-dot {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50%       { opacity: 0.4; transform: scale(0.7); }
-    }
-
-    /* Tabs personalizados — estilo píldora */
-    #horariosTab .nav-link {
-        background-color: #2a2b30;
-        color: #888;
-        border: none;
-        border-radius: 50px !important;
-        padding: 12px 20px;
-        font-size: 1rem;
-        transition: all 0.2s;
-    }
-
-    #horariosTab .nav-link.active {
-        background-color: var(--ug-gold-bright, #FFD000) !important;
-        color: #1a1b1f !important;
-        font-weight: 800;
-    }
-`;
-document.head.appendChild(estilosHorarios);
-
-// ==========================================
-// UTILIDADES
-// ==========================================
 function getInitials(name) {
     return name
         .trim()
@@ -101,9 +20,6 @@ function getInitials(name) {
         .join("");
 }
 
-// ==========================================
-// CONTROL DEL SPLASH SCREEN
-// ==========================================
 let splashOculto = false;
 
 window.ocultarSplashScreen = function () {
@@ -119,14 +35,11 @@ window.ocultarSplashScreen = function () {
     }
 };
 
-// Respaldo: si Firebase tarda demasiado, ocultamos splash a los 4 segundos
 window.addEventListener("load", () => {
     setTimeout(window.ocultarSplashScreen, 4000);
 });
 
-// ==========================================
-// MODAL — RUTAS ACTIVAS
-// ==========================================
+//rutas activas
 const linkRuta = document.getElementById("linkRutasActivas");
 const modalDetallesEl = document.getElementById("modalDetallesRuta");
 
@@ -142,9 +55,7 @@ if (linkRuta && modalDetallesEl) {
     modalDetallesEl.addEventListener("hide.bs.modal", () => linkRuta.classList.remove("active"));
 }
 
-// ==========================================
-// SISTEMA DE HORARIOS
-// ==========================================
+//sistema de horarios
 const horarios = {
     ascenso: [
         "07:00", "07:10", "07:20", "07:30", "07:45", "08:00", "08:30", "09:00", "09:10",
@@ -164,13 +75,13 @@ const horarios = {
     ]
 };
 
-/** Convierte "14:30" a minutos desde medianoche */
+
 function getMinutes(timeStr) {
     const [h, m] = timeStr.split(":");
     return parseInt(h) * 60 + parseInt(m);
 }
 
-/** Convierte "14:30" → "2:30 p.m." */
+
 function formatTime(time24) {
     let [h, m] = time24.split(":");
     let hours = parseInt(h);
@@ -197,7 +108,6 @@ function renderizarHorarios() {
             const badge = document.createElement("div");
             badge.className = "time-badge";
 
-            // Resaltar el próximo camión según la hora del dispositivo
             if (!isWeekend && !nextFound && timeMins >= currentMinutes) {
                 badge.classList.add("next-bus");
                 badge.innerHTML = `<span class="live-dot"></span>${formatTime(time24)}`;
@@ -230,13 +140,13 @@ function renderizarHorarios() {
         row.style.backgroundColor = "#2a2b30";
         row.innerHTML = `
             <span class="text-white-50 d-flex align-items-center gap-2">
-                <i class="bi bi-geo-alt" style="color: var(--ug-gold-bright);"></i>
+                <i class="bi bi-geo-alt text-ug-gold-bright"></i>
                 ${esp.nombre}
             </span>
             <div class="d-flex gap-2">
                 ${esp.horas.map(h => `
-                    <span class="badge rounded-pill px-3 py-2 fw-semibold"
-                          style="background-color:#3a4a6b; color:#a8c4f0; font-size:0.8rem;">
+                    <span class="badge rounded-pill px-3 py-2 fw-semibold bg-ug-blue-muted text-white"
+                          style="font-size:0.8rem;">
                         ${formatTime(h)}
                     </span>
                 `).join("")}
@@ -252,9 +162,7 @@ if (modalHorarios) {
     modalHorarios.addEventListener("show.bs.modal", renderizarHorarios);
 }
 
-// ==========================================
-// FIREBASE — PROTECCIÓN DE RUTA Y ROLES
-// ==========================================
+
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "login.html";
@@ -316,9 +224,7 @@ onAuthStateChanged(auth, async (user) => {
     window.ocultarSplashScreen();
 });
 
-// ==========================================
-// LOGOUT
-// ==========================================
+
 document.getElementById("btnLogout").addEventListener("click", async () => {
     await logoutUser();
     window.location.href = "login.html";

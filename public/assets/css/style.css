@@ -605,3 +605,69 @@ body {
         display: none !important;
     }
 }
+/* --- SISTEMA DE HORARIOS --- */
+
+/* Grid de 3 columnas para los horarios */
+#lista-ascenso,
+#lista-descenso {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Badge base */
+.time-badge {
+    background-color: #2a2b30;
+    color: #cccccc;
+    border-radius: 12px;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    line-height: 1.2;
+}
+
+/* Próximo camión — resaltado dorado */
+.time-badge.next-bus {
+    background-color: var(--ug-gold-bright);
+    color: #1a1b1f;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+/* Punto animado dentro del badge próximo */
+.time-badge.next-bus .live-dot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background-color: #1a1b1f;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 1.4s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Tabs del modal de horarios — estilo píldora */
+#horariosTab .nav-link {
+    background-color: #2a2b30;
+    color: #888;
+    border: none;
+    border-radius: 50px !important;
+    padding: 12px 20px;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+#horariosTab .nav-link.active {
+    background-color: var(--ug-gold-bright) !important;
+    color: #1a1b1f !important;
+    font-weight: 800;
+}
