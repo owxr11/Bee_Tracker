@@ -742,6 +742,14 @@ body {
         gap: 6px !important;
         padding: 0.75rem !important;
     }
+
+     main.admin-main-container {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 2rem 1rem !important;
+        margin: 0 !important;
+    }
 }
 
 @media (max-width: 360px) {

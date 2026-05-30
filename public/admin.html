@@ -14,15 +14,15 @@
 <body class="login-body d-flex flex-column min-vh-100">
 
     <nav class="navbar py-3 border-bottom border-secondary border-opacity-25 z-3">
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
             
             <div class="d-flex align-items-center gap-2">
                 <img src="./assets/img/logoUGPSsf.png" alt="Logo UGPS" class="bg-gray rounded-3 p-1 admin-nav-logo">
                 <span class="fw-bold text-ug-gold-bright fs-5 ms-2 mb-0 tracking-wide">UGPS</span>
-                <span class="text-white-50 small fw-bold ms-2 mt-1 tracking-wide">PANEL ADMIN</span>
+                <span class="text-white-50 small fw-bold ms-2 mt-1 tracking-wide d-none d-sm-inline">PANEL ADMIN</span>
             </div>
 
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                 <div class="d-flex align-items-center px-3 py-1 rounded-pill admin-user-pill">
                     <i class="bi bi-shield-lock-fill text-ug-gold-bright me-2"></i>
                     <span class="text-white-50 small">Hola, <strong class="text-white" id="adminName">Cargando...</strong></span>
@@ -34,16 +34,18 @@
         </div>
     </nav>
 
-    <main class="flex-grow-1 container py-5">
+    <main class="flex-grow-1 container py-4 py-md-5 admin-main-container">
         
-        <div class="d-flex justify-content-between align-items-end mb-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end gap-3 mb-5">
             <div>
                 <p class="text-ug-gold-bright fw-bold tracking-wide small mb-1">ADMINISTRACIÓN</p>
-                <h2 class="fw-bold text-white mb-0">Gestión de Usuarios</h2>
+                <h2 class="fw-bold text-white mb-0 fs-3 fs-md-2">Gestión de Usuarios</h2>
             </div>
-            <button class="btn btn-ug-gold fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#modalChofer">
-                <i class="bi bi-person-plus-fill me-2"></i>Agregar Chofer
-            </button>
+            <div class="d-grid w-100 d-md-block" style="flex-basis: auto;">
+                <button class="btn btn-ug-gold fw-bold px-4 py-2 w-100" data-bs-toggle="modal" data-bs-target="#modalChofer">
+                    <i class="bi bi-person-plus-fill me-2"></i>Agregar Chofer
+                </button>
+            </div>
         </div>
 
         <div class="row g-4 mb-5" id="kpiCards">
@@ -86,7 +88,7 @@
 
         <div class="login-card p-0 overflow-hidden">
             <div class="table-responsive">
-                <table class="table table-hover custom-table mb-0 align-middle">
+                <table class="table table-hover custom-table mb-0 align-middle text-nowrap">
                     <thead>
                         <tr>
                             <th class="py-4 ps-5 border-0">Nombre</th>
