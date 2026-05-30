@@ -750,6 +750,10 @@ body {
         padding: 2rem 1rem !important;
         margin: 0 !important;
     }
+    
+    .modal-content.login-card {
+        background-color: var(--sidebar-dark) !important;
+    }
 }
 
 @media (max-width: 360px) {
