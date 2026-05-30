@@ -6,16 +6,10 @@ import { initMap } from "./map.js";
 import { iniciarTransmisionUbicacion } from "./location.js";
 import { escucharChoferesEnTiempoReal } from "./realtime.js";
 
-// ==========================================
-// INICIALIZAR MAPA
-// ==========================================
 initMap();
 
 let watchId = null;
 
-// ==========================================
-// UTILIDADES
-// ==========================================
 function getInitials(name) {
     return name
         .trim()
@@ -26,9 +20,7 @@ function getInitials(name) {
         .join("");
 }
 
-// ==========================================
-// CONTROL DEL SPLASH SCREEN
-// ==========================================
+
 let splashOculto = false;
 
 window.ocultarSplashScreen = function () {
@@ -47,9 +39,6 @@ window.addEventListener("load", () => {
     setTimeout(window.ocultarSplashScreen, 4000);
 });
 
-// ==========================================
-// MODAL — RUTAS ACTIVAS
-// ==========================================
 const linkRuta = document.getElementById("linkRutasActivas");
 const modalDetallesEl = document.getElementById("modalDetallesRuta");
 
@@ -65,15 +54,13 @@ if (linkRuta && modalDetallesEl) {
     modalDetallesEl.addEventListener("hide.bs.modal", () => linkRuta.classList.remove("active"));
 }
 
-// ==========================================
-// MODAL HORARIOS — Ocultar/mostrar menú
-// ==========================================
+
+//error corregido, aparicion logo-modal responsive
 const modalHorarios = document.getElementById("modalHorarios");
 const logoPill = document.querySelector(".sidebar > a");
-const bottomNav = document.querySelector("ul.nav"); // <-- ¡Definimos la variable que faltaba!
+const bottomNav = document.querySelector("ul.nav"); 
 
 if (modalHorarios) {
-    // Al ABRIR el modal: oculta el menú inferior y el logo en móvil
     modalHorarios.addEventListener("show.bs.modal", () => {
         renderizarHorarios();
         
@@ -81,7 +68,6 @@ if (modalHorarios) {
             if (bottomNav) {
                 bottomNav.style.transition = "opacity 0.2s, transform 0.2s";
                 bottomNav.style.opacity = "0";
-                // Mantenemos el -50% en X para que no pierda su centrado al ocultarse
                 bottomNav.style.transform = "translate(-50%, 20px)";
                 bottomNav.style.pointerEvents = "none";
             }
@@ -94,17 +80,14 @@ if (modalHorarios) {
         }
     });
 
-    // Al CERRAR el modal: restaura el menú inferior y el logo
     modalHorarios.addEventListener("hide.bs.modal", () => {
         if (window.innerWidth <= 768) {
             if (bottomNav) {
                 bottomNav.style.opacity = "1";
-                // Dejarlo vacío restaura las propiedades originales de tu archivo CSS
                 bottomNav.style.transform = ""; 
                 bottomNav.style.pointerEvents = "auto";
             }
             if (logoPill) {
-                // <-- ¡Esta es la parte que faltaba para revivir el logo!
                 logoPill.style.opacity = "1";
                 logoPill.style.transform = ""; 
                 logoPill.style.pointerEvents = "auto";
@@ -113,9 +96,6 @@ if (modalHorarios) {
     });
 }
 
-// ==========================================
-// SISTEMA DE HORARIOS
-// ==========================================
 const horarios = {
     ascenso: [
         "07:00", "07:10", "07:20", "07:30", "07:45", "08:00", "08:30", "09:00", "09:10",
@@ -211,9 +191,7 @@ function renderizarHorarios() {
     });
 }
 
-// ==========================================
-// FIREBASE — PROTECCIÓN DE RUTA Y ROLES
-// ==========================================
+
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "login.html";
@@ -271,9 +249,7 @@ onAuthStateChanged(auth, async (user) => {
     window.ocultarSplashScreen();
 });
 
-// ==========================================
-// LOGOUT
-// ==========================================
+
 document.getElementById("btnLogout").addEventListener("click", async () => {
     await logoutUser();
     window.location.href = "login.html";
