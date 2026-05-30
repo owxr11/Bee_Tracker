@@ -605,9 +605,10 @@ body {
         display: none !important;
     }
 }
-/* --- SISTEMA DE HORARIOS --- */
+/* ============================================
+   SISTEMA DE HORARIOS — ESTILOS BASE
+   ============================================ */
 
-/* Grid de 3 columnas para los horarios */
 #lista-ascenso,
 #lista-descenso {
     display: grid !important;
@@ -615,7 +616,6 @@ body {
     gap: 10px;
 }
 
-/* Badge base */
 .time-badge {
     background-color: #2a2b30;
     color: #cccccc;
@@ -631,7 +631,6 @@ body {
     line-height: 1.2;
 }
 
-/* Próximo camión — resaltado dorado */
 .time-badge.next-bus {
     background-color: var(--ug-gold-bright);
     color: #1a1b1f;
@@ -639,7 +638,6 @@ body {
     font-size: 1rem;
 }
 
-/* Punto animado dentro del badge próximo */
 .time-badge.next-bus .live-dot {
     width: 8px;
     height: 8px;
@@ -655,7 +653,6 @@ body {
     50%       { opacity: 0.4; transform: scale(0.7); }
 }
 
-/* Tabs del modal de horarios — estilo píldora */
 #horariosTab .nav-link {
     background-color: #2a2b30;
     color: #888;
@@ -670,4 +667,86 @@ body {
     background-color: var(--ug-gold-bright) !important;
     color: #1a1b1f !important;
     font-weight: 800;
+}
+
+/* ============================================
+   MODAL HORARIOS — RESPONSIVE MÓVIL
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Fondo oscuro forzado — elimina el blanco de Bootstrap */
+    #modalHorarios .modal-content {
+        background-color: #1a1b1f !important;
+        color: #ffffff !important;
+        border-radius: 0 !important;
+        border: none !important;
+        min-height: 100dvh !important;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #modalHorarios {
+        padding: 0 !important;
+    }
+
+    #modalHorarios .modal-dialog {
+        margin: 0 !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        min-height: 100dvh;
+        display: flex;
+        align-items: flex-start !important;
+    }
+
+    #modalHorarios .modal-header {
+        padding: 1.2rem 1rem 1rem !important;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: #1a1b1f !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    }
+
+    #modalHorarios .modal-header h4 {
+        font-size: 1.15rem !important;
+    }
+
+    #modalHorarios .modal-body {
+        padding: 1rem 0.85rem 2rem !important;
+        background-color: #1a1b1f !important;
+    }
+
+    #horariosTab .nav-link {
+        padding: 10px 14px !important;
+        font-size: 0.9rem !important;
+    }
+
+    #lista-ascenso,
+    #lista-descenso {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .time-badge {
+        padding: 13px 4px !important;
+        font-size: 0.8rem !important;
+        border-radius: 10px !important;
+    }
+
+    .time-badge.next-bus {
+        font-size: 0.85rem !important;
+    }
+
+    #lista-especiales > div {
+        flex-wrap: wrap;
+        gap: 6px !important;
+        padding: 0.75rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    #lista-ascenso,
+    #lista-descenso {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }

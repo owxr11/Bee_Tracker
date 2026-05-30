@@ -20,12 +20,13 @@ function getInitials(name) {
         .join("");
 }
 
+
+
 let splashOculto = false;
 
 window.ocultarSplashScreen = function () {
     if (splashOculto) return;
     splashOculto = true;
-
     const splash = document.getElementById("splash-screen");
     if (splash) {
         setTimeout(() => {
@@ -55,6 +56,41 @@ if (linkRuta && modalDetallesEl) {
     modalDetallesEl.addEventListener("hide.bs.modal", () => linkRuta.classList.remove("active"));
 }
 
+//
+const modalHorarios = document.getElementById("modalHorarios");
+const bottomNav = document.querySelector(".nav.nav-pills");
+const logoPill = document.querySelector(".sidebar > a");
+
+if (modalHorarios) {
+    // Al ABRIR el modal: oculta el menú inferior en móvil
+    modalHorarios.addEventListener("show.bs.modal", () => {
+        renderizarHorarios();
+        if (window.innerWidth <= 768 && bottomNav) {
+            bottomNav.style.transition = "opacity 0.2s, transform 0.2s";
+            bottomNav.style.opacity = "0";
+            bottomNav.style.transform = "translateY(20px)";
+            bottomNav.style.pointerEvents = "none";
+        }
+        if (logoPill) {
+            logoPill.style.transition = "opacity 0.2s, transform 0.2s";
+            logoPill.style.opacity = "0";
+            logoPill.style.transform = "translateY(-20px)";
+            logoPill.style.pointerEvents = "none";
+        }
+        if (false) {
+        }
+    });
+
+    // Al CERRAR el modal: restaura el menú inferior
+    modalHorarios.addEventListener("hide.bs.modal", () => {
+        if (bottomNav) {
+            bottomNav.style.opacity = "1";
+            bottomNav.style.transform = "";
+            bottomNav.style.pointerEvents = "";
+        }
+    });
+}
+
 //sistema de horarios
 const horarios = {
     ascenso: [
@@ -75,12 +111,10 @@ const horarios = {
     ]
 };
 
-
 function getMinutes(timeStr) {
     const [h, m] = timeStr.split(":");
     return parseInt(h) * 60 + parseInt(m);
 }
-
 
 function formatTime(time24) {
     let [h, m] = time24.split(":");
@@ -91,7 +125,6 @@ function formatTime(time24) {
 }
 
 function renderizarHorarios() {
-    // Hora actual del dispositivo del usuario
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     const isWeekend = now.getDay() === 0 || now.getDay() === 6;
@@ -119,7 +152,6 @@ function renderizarHorarios() {
             container.appendChild(badge);
         });
 
-        // Si ya pasaron todos los camiones del día
         if (!nextFound && container.children.length > 0) {
             const aviso = document.createElement("p");
             aviso.className = "text-white-50 fst-italic small mt-2";
@@ -129,7 +161,6 @@ function renderizarHorarios() {
         }
     });
 
-    // Paradas Especiales
     const espContainer = document.getElementById("lista-especiales");
     if (!espContainer) return;
     espContainer.innerHTML = "";
@@ -156,11 +187,6 @@ function renderizarHorarios() {
     });
 }
 
-// Renderizar cada vez que se abra el modal (hora siempre actualizada)
-const modalHorarios = document.getElementById("modalHorarios");
-if (modalHorarios) {
-    modalHorarios.addEventListener("show.bs.modal", renderizarHorarios);
-}
 
 
 onAuthStateChanged(auth, async (user) => {
@@ -187,18 +213,15 @@ onAuthStateChanged(auth, async (user) => {
                 data.role === "estudiante" ? "Alumno" :
                 data.role === "chofer"     ? "Chofer" : "Admin";
 
-            // Lógica por rol
             if (data.role === "chofer") {
                 console.log("Rol: Chofer. Iniciando transmisión de ubicación...");
                 iniciarTransmisionUbicacion(user.uid);
                 escucharChoferesEnTiempoReal();
-
             } else if (data.role === "estudiante" || data.role === "admin") {
                 console.log(`Rol: ${data.role}. Modo lectura de mapa activo.`);
                 escucharChoferesEnTiempoReal();
             }
 
-            // Enlace al panel admin (solo admins)
             if (data.role === "admin") {
                 const sidebar = document.querySelector(".nav.nav-pills");
                 const li = document.createElement("li");
@@ -220,7 +243,6 @@ onAuthStateChanged(auth, async (user) => {
         console.error("Error al validar el rol:", error);
     }
 
-    // Ocultar splash cuando Firebase ya respondió
     window.ocultarSplashScreen();
 });
 
