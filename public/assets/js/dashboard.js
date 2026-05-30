@@ -6,10 +6,16 @@ import { initMap } from "./map.js";
 import { iniciarTransmisionUbicacion } from "./location.js";
 import { escucharChoferesEnTiempoReal } from "./realtime.js";
 
+// ==========================================
+// INICIALIZAR MAPA
+// ==========================================
 initMap();
 
 let watchId = null;
 
+// ==========================================
+// UTILIDADES
+// ==========================================
 function getInitials(name) {
     return name
         .trim()
@@ -20,8 +26,9 @@ function getInitials(name) {
         .join("");
 }
 
-
-
+// ==========================================
+// CONTROL DEL SPLASH SCREEN
+// ==========================================
 let splashOculto = false;
 
 window.ocultarSplashScreen = function () {
@@ -40,7 +47,9 @@ window.addEventListener("load", () => {
     setTimeout(window.ocultarSplashScreen, 4000);
 });
 
-//rutas activas
+// ==========================================
+// MODAL — RUTAS ACTIVAS
+// ==========================================
 const linkRuta = document.getElementById("linkRutasActivas");
 const modalDetallesEl = document.getElementById("modalDetallesRuta");
 
@@ -56,42 +65,57 @@ if (linkRuta && modalDetallesEl) {
     modalDetallesEl.addEventListener("hide.bs.modal", () => linkRuta.classList.remove("active"));
 }
 
-//
+// ==========================================
+// MODAL HORARIOS — Ocultar/mostrar menú
+// ==========================================
 const modalHorarios = document.getElementById("modalHorarios");
-const bottomNav = document.querySelector(".nav.nav-pills");
 const logoPill = document.querySelector(".sidebar > a");
+const bottomNav = document.querySelector("ul.nav"); // <-- ¡Definimos la variable que faltaba!
 
 if (modalHorarios) {
-    // Al ABRIR el modal: oculta el menú inferior en móvil
+    // Al ABRIR el modal: oculta el menú inferior y el logo en móvil
     modalHorarios.addEventListener("show.bs.modal", () => {
         renderizarHorarios();
-        if (window.innerWidth <= 768 && bottomNav) {
-            bottomNav.style.transition = "opacity 0.2s, transform 0.2s";
-            bottomNav.style.opacity = "0";
-            bottomNav.style.transform = "translateY(20px)";
-            bottomNav.style.pointerEvents = "none";
-        }
-        if (logoPill) {
-            logoPill.style.transition = "opacity 0.2s, transform 0.2s";
-            logoPill.style.opacity = "0";
-            logoPill.style.transform = "translateY(-20px)";
-            logoPill.style.pointerEvents = "none";
-        }
-        if (false) {
+        
+        if (window.innerWidth <= 768) {
+            if (bottomNav) {
+                bottomNav.style.transition = "opacity 0.2s, transform 0.2s";
+                bottomNav.style.opacity = "0";
+                // Mantenemos el -50% en X para que no pierda su centrado al ocultarse
+                bottomNav.style.transform = "translate(-50%, 20px)";
+                bottomNav.style.pointerEvents = "none";
+            }
+            if (logoPill) {
+                logoPill.style.transition = "opacity 0.2s, transform 0.2s";
+                logoPill.style.opacity = "0";
+                logoPill.style.transform = "translate(-50%, -20px)";
+                logoPill.style.pointerEvents = "none";
+            }
         }
     });
 
-    // Al CERRAR el modal: restaura el menú inferior
+    // Al CERRAR el modal: restaura el menú inferior y el logo
     modalHorarios.addEventListener("hide.bs.modal", () => {
-        if (bottomNav) {
-            bottomNav.style.opacity = "1";
-            bottomNav.style.transform = "";
-            bottomNav.style.pointerEvents = "";
+        if (window.innerWidth <= 768) {
+            if (bottomNav) {
+                bottomNav.style.opacity = "1";
+                // Dejarlo vacío restaura las propiedades originales de tu archivo CSS
+                bottomNav.style.transform = ""; 
+                bottomNav.style.pointerEvents = "auto";
+            }
+            if (logoPill) {
+                // <-- ¡Esta es la parte que faltaba para revivir el logo!
+                logoPill.style.opacity = "1";
+                logoPill.style.transform = ""; 
+                logoPill.style.pointerEvents = "auto";
+            }
         }
     });
 }
 
-//sistema de horarios
+// ==========================================
+// SISTEMA DE HORARIOS
+// ==========================================
 const horarios = {
     ascenso: [
         "07:00", "07:10", "07:20", "07:30", "07:45", "08:00", "08:30", "09:00", "09:10",
@@ -187,8 +211,9 @@ function renderizarHorarios() {
     });
 }
 
-
-
+// ==========================================
+// FIREBASE — PROTECCIÓN DE RUTA Y ROLES
+// ==========================================
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "login.html";
@@ -246,7 +271,9 @@ onAuthStateChanged(auth, async (user) => {
     window.ocultarSplashScreen();
 });
 
-
+// ==========================================
+// LOGOUT
+// ==========================================
 document.getElementById("btnLogout").addEventListener("click", async () => {
     await logoutUser();
     window.location.href = "login.html";
