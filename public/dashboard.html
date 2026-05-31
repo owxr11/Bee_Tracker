@@ -36,29 +36,38 @@
 
             <hr class="border-secondary my-4">
 
-            <ul class="nav nav-pills flex-column mb-auto gap-3 w-100">
+            <ul class="nav flex-column mb-auto gap-3 w-100">
                 <li class="nav-item">
-                    <a href="#" id="linkRutasActivas"
-                        class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
+                    <a href="#" id="linkRutasActivas" data-bs-toggle="modal" data-bs-target="#modalDetallesRuta"
+                        class="nav-link text-white-50 hover-gold d-flex align-items-center p-3 transition-base">
                         <i class="bi bi-truck text-center"></i>
                         <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">Rutas Activas</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="linkHorarios" data-bs-toggle="modal" data-bs-target="#modalHorarios"
-                        class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
+                        class="nav-link text-white-50 hover-gold d-flex align-items-center p-3 transition-base">
                         <i class="bi bi-clock-history text-center"></i>
                         <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">Horarios</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base">
-                        <i class="bi bi-bell text-center"></i>
-                        <span
-                            class="nav-text ms-3 d-flex justify-content-between align-items-center w-100 fs-5 opacity-0 invisible transition-fade">
+                    <a href="#" id="linkNotificaciones" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
+                        class="nav-link text-white-50 hover-gold d-flex align-items-center p-3 transition-base">
+                        <div class="position-relative d-inline-block">
+                            <i class="bi bi-bell text-center"></i>
+                            <span id="notifBadge" class="badge bg-ug-gold-bright text-dark rounded-pill position-absolute top-0 start-100 translate-middle p-1 small-badge d-none">1</span>
+                        </div>
+                        <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">
                             Notificaciones
-                            <span class="badge bg-ug-gold-bright text-dark rounded-pill fs-6">3</span>
                         </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./profile.html"
+                        class="nav-link text-white-50 hover-nav d-flex align-items-center p-3 transition-base d-none d-flex-mobile">
+                        <i class="bi bi-person-circle text-center"></i>
+                        <span class="nav-text ms-3 fs-5 opacity-0 invisible transition-fade">Perfil</span>
                     </a>
                 </li>
             </ul>
@@ -91,46 +100,33 @@
         <main class="d-flex flex-column flex-grow-1 position-relative p-3 bg-sidebar-dark">
             <div id="mapa" class="w-100 h-100 rounded-4 shadow-lg overflow-hidden z-1"></div>
 
-            <div class="modal fade" id="modalDetallesRuta" tabindex="-1" data-bs-backdrop="false"
-                style="pointer-events: none;" aria-hidden="true">
+            <!-- Modal para Detalles de Rutas Activas -->
+            <div class="modal fade" id="modalDetallesRuta" tabindex="-1" data-bs-backdrop="false" style="pointer-events: none;" aria-hidden="true">
                 <div class="modal-dialog modal-abs-top" style="pointer-events: auto;">
-                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
-                        <div class="modal-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="fw-bold mb-0 text-dark">Detalles de Ruta</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="mb-4">
-                                <span
-                                    class="badge bg-ug-gold-bright text-dark rounded-pill px-3 py-2 fw-bold shadow-sm">
-                                    <span class="spinner-grow spinner-grow-sm me-1" role="status"></span>
-                                    En tránsito
-                                </span>
-                            </div>
-                            <div class="timeline border-start border-2 ms-2 ps-3 py-1"
-                                style="border-color: var(--ug-gold-bright) !important;">
-                                <div class="mb-3 position-relative">
-                                    <div class="position-absolute bg-ug-gold-bright rounded-circle"
-                                        style="width: 10px; height: 10px; left: -22px; top: 5px;"></div>
-                                    <h6 class="fw-bold mb-0 text-dark">DICIS</h6>
-                                    <small class="text-muted">Punto de partida</small>
+                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden bg-sidebar-dark text-white">
+                        <div class="modal-header border-secondary border-opacity-25 p-4">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <div>
+                                    <h5 class="fw-bold mb-0 text-ug-gold-bright">Monitoreo de Rutas</h5>
+                                    <small class="text-white-50">Unidades de la colmena en tránsito</small>
                                 </div>
-                                <div class="position-relative">
-                                    <div class="position-absolute bg-ug-blue-muted rounded-circle"
-                                        style="width: 10px; height: 10px; left: -22px; top: 5px;"></div>
-                                    <h6 class="fw-bold mb-0 text-dark">ENMS. Salamanca</h6>
-                                    <small class="text-muted">Destino actual</small>
-                                </div>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="modal-body p-4 d-flex flex-column gap-3" id="lista-rutas-activas">
+                            <div class="text-center py-3 text-white-50">
+                                <div class="spinner-border spinner-border-sm text-ug-gold-bright me-2" role="status"></div>
+                                Buscando unidades activas...
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Modal para Horarios -->
             <div class="modal fade" id="modalHorarios" tabindex="-1" data-bs-backdrop="false"
                 style="pointer-events: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="pointer-events: auto;">
+                <div class="modal-dialog modal-dialog-scrollable modal-abs-top" style="pointer-events: auto;">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden bg-sidebar-dark text-white">
                         <div class="modal-header border-secondary border-opacity-25 p-4">
                             <div>
@@ -166,6 +162,40 @@
                                     <h6 class="text-white-50 mb-3 border-bottom border-secondary pb-2"><i
                                             class="bi bi-geo-alt text-ug-gold-bright me-2"></i>De DICIS a ENMS 2</h6>
                                     <div class="d-flex flex-wrap gap-2 mb-4" id="lista-descenso"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Notificaciones -->
+            <div class="modal fade" id="modalNotificaciones" tabindex="-1" data-bs-backdrop="false" style="pointer-events: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-abs-top" style="pointer-events: auto;">
+                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden bg-sidebar-dark text-white">
+                        <div class="modal-header border-secondary border-opacity-25 p-4">
+                            <div>
+                                <h4 class="fw-bold mb-0 text-ug-gold-bright">Avisos de la Colmena</h4>
+                                <small class="text-white-50">Alertas de rutas y vialidad en tiempo real</small>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body p-4">
+                            <form id="formNuevaNotificacion" class="d-none mb-4 pb-3 border-bottom border-secondary border-opacity-25">
+                                <label class="form-label text-white-50 small fw-medium">PUBLICAR NUEVO AVISO</label>
+                                <div class="input-group gap-2">
+                                    <textarea id="txtNotificacion" class="form-control form-control-dark p-3" rows="2" placeholder="Ej: Camión retrasado por tráfico en Calzada de los Héroes..." required style="padding-left: 16px !important; border-radius: 14px !important;"></textarea>
+                                    <button type="submit" id="btnEnviarNotif" class="btn btn-ug-gold d-flex align-items-center justify-content-center px-3" style="border-radius: 14px !important;">
+                                        <i class="bi bi-send-fill fs-5"></i>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div id="lista-notificaciones" class="d-flex flex-column gap-3">
+                                <div class="text-center py-3 text-white-50">
+                                    <div class="spinner-border spinner-border-sm text-ug-gold-bright me-2" role="status"></div>
+                                    Cargando avisos...
                                 </div>
                             </div>
                         </div>

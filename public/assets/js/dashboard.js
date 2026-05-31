@@ -5,6 +5,7 @@ import { logoutUser } from "./auth.js";
 import { initMap } from "./map.js";
 import { iniciarTransmisionUbicacion } from "./location.js";
 import { escucharChoferesEnTiempoReal } from "./realtime.js";
+import { inicializarModuloNotificaciones } from "./notifications.js";
 
 initMap();
 
@@ -39,15 +40,29 @@ window.addEventListener("load", () => {
     setTimeout(window.ocultarSplashScreen, 4000);
 });
 
+// ── Modal Rutas Activas ──────────────────────────────────────────────────────
 const linkRuta = document.getElementById("linkRutasActivas");
 const modalDetallesEl = document.getElementById("modalDetallesRuta");
 
 if (linkRuta && modalDetallesEl) {
     const bsModalRuta = new bootstrap.Modal(modalDetallesEl);
 
+    // IDs de los otros modales que deben cerrarse antes de abrir este
+    const otrosModalIds = ["modalHorarios", "modalNotificaciones"];
+
     linkRuta.addEventListener("click", (e) => {
         e.preventDefault();
-        modalDetallesEl.classList.contains("show") ? bsModalRuta.hide() : bsModalRuta.show();
+
+        if (modalDetallesEl.classList.contains("show")) {
+            bsModalRuta.hide();
+        } else {
+            // Cierra cualquier otro modal abierto antes de mostrar Rutas Activas
+            otrosModalIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) bootstrap.Modal.getOrCreateInstance(el).hide();
+            });
+            bsModalRuta.show();
+        }
     });
 
     modalDetallesEl.addEventListener("show.bs.modal", () => linkRuta.classList.add("active"));
@@ -55,44 +70,25 @@ if (linkRuta && modalDetallesEl) {
 }
 
 
-//error corregido, aparicion logo-modal responsive
+// ── Modal Horarios ───────────────────────────────────────────────────────────
+const linkHorarios = document.getElementById("linkHorarios");
+const linkNotificaciones = document.getElementById("linkNotificaciones");
+
+// Helper: activa/desactiva la clase active en un link según eventos del modal
+function bindActiveClass(linkEl, modalEl) {
+    if (!linkEl || !modalEl) return;
+    modalEl.addEventListener("show.bs.modal", () => linkEl.classList.add("active"));
+    modalEl.addEventListener("hide.bs.modal", () => linkEl.classList.remove("active"));
+}
+
+bindActiveClass(linkHorarios, document.getElementById("modalHorarios"));
+bindActiveClass(linkNotificaciones, document.getElementById("modalNotificaciones"));
+
 const modalHorarios = document.getElementById("modalHorarios");
-const logoPill = document.querySelector(".sidebar > a");
-const bottomNav = document.querySelector("ul.nav"); 
 
 if (modalHorarios) {
     modalHorarios.addEventListener("show.bs.modal", () => {
         renderizarHorarios();
-        
-        if (window.innerWidth <= 768) {
-            if (bottomNav) {
-                bottomNav.style.transition = "opacity 0.2s, transform 0.2s";
-                bottomNav.style.opacity = "0";
-                bottomNav.style.transform = "translate(-50%, 20px)";
-                bottomNav.style.pointerEvents = "none";
-            }
-            if (logoPill) {
-                logoPill.style.transition = "opacity 0.2s, transform 0.2s";
-                logoPill.style.opacity = "0";
-                logoPill.style.transform = "translate(-50%, -20px)";
-                logoPill.style.pointerEvents = "none";
-            }
-        }
-    });
-
-    modalHorarios.addEventListener("hide.bs.modal", () => {
-        if (window.innerWidth <= 768) {
-            if (bottomNav) {
-                bottomNav.style.opacity = "1";
-                bottomNav.style.transform = ""; 
-                bottomNav.style.pointerEvents = "auto";
-            }
-            if (logoPill) {
-                logoPill.style.opacity = "1";
-                logoPill.style.transform = ""; 
-                logoPill.style.pointerEvents = "auto";
-            }
-        }
     });
 }
 
@@ -192,6 +188,7 @@ function renderizarHorarios() {
 }
 
 
+// ── Auth & roles ─────────────────────────────────────────────────────────────
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "login.html";
@@ -215,6 +212,9 @@ onAuthStateChanged(auth, async (user) => {
             document.getElementById("sidebarRole").textContent =
                 data.role === "estudiante" ? "Alumno" :
                 data.role === "chofer"     ? "Chofer" : "Admin";
+
+            // Inicializa notificaciones para todos los roles
+            inicializarModuloNotificaciones(data);
 
             if (data.role === "chofer") {
                 console.log("Rol: Chofer. Iniciando transmisión de ubicación...");
