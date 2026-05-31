@@ -37,7 +37,7 @@ export function initMap() {
     setTimeout(() => map.invalidateSize(), 500);
 
     // llamada de prueba!!
-    updateMarker('camion_prueba', DEFAULT_CENTER[0], DEFAULT_CENTER[1]);
+    //updateMarker('camion_prueba', DEFAULT_CENTER[0], DEFAULT_CENTER[1]);
 }
 
 export function updateMarker(uid, lat, lng) {
