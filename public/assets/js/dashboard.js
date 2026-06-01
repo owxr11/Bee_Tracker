@@ -105,9 +105,9 @@ const horarios = {
         "15:10", "15:40", "16:10", "16:20", "16:35", "17:00", "17:25", "17:45", "18:00", "18:15"
     ],
     especiales: [
-        { nombre: "Puentes Gemelos",      horas: ["07:10", "07:30"] },
+        { nombre: "Puentes Gemelos", horas: ["07:10", "07:30"] },
         { nombre: "Central de Autobuses", horas: ["07:35"] },
-        { nombre: "Aurrera",              horas: ["09:35"] }
+        { nombre: "Aurrera", horas: ["09:35"] }
     ]
 };
 
@@ -211,7 +211,7 @@ onAuthStateChanged(auth, async (user) => {
                 data.name?.split(" ")[0] + " " + (data.name?.split(" ")[1]?.[0] || "") + ".";
             document.getElementById("sidebarRole").textContent =
                 data.role === "estudiante" ? "Alumno" :
-                data.role === "chofer"     ? "Chofer" : "Admin";
+                    data.role === "chofer" ? "Chofer" : "Admin";
 
             // Inicializa notificaciones para todos los roles
             inicializarModuloNotificaciones(data);
@@ -251,6 +251,11 @@ onAuthStateChanged(auth, async (user) => {
 
 
 document.getElementById("btnLogout").addEventListener("click", async () => {
+    await logoutUser();
+    window.location.href = "login.html";
+});
+
+document.getElementById('btnLogoutMobile')?.addEventListener('click', async () => {
     await logoutUser();
     window.location.href = "login.html";
 });
