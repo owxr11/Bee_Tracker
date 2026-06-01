@@ -226,22 +226,16 @@ onAuthStateChanged(auth, async (user) => {
             }
 
            if (data.role==="admin") {
-                const sidebar = document.querySelector(".nav.nav-pills");
+                const sidebar = document.querySelector(".sidebar ul.nav");
                 const li = document.createElement("li");
-                li.className = "nav-item mt-2 d-none d-md-block"; 
+                li.className = "nav-item"; 
                 li.innerHTML = `
-                    <a href="admin.html" class="nav-link d-flex align-items-center p-3 transition-base">
+                    <a href="admin.html" class="nav-link hover-gold d-flex align-items-center p-3 transition-base">
                         <i class="bi bi-shield-lock-fill text-ug-gold-bright text-center"></i>
                         <span class="nav-text ms-3 fs-5 text-ug-gold-bright fw-bold opacity-0 invisible transition-fade">Panel Admin</span>
                     </a>
                 `;
                 sidebar.appendChild(li);
-
-                const mobileAdminBtn = document.createElement("a");
-                mobileAdminBtn.href = "admin.html";
-                mobileAdminBtn.className = "admin-floating-btn";
-                mobileAdminBtn.innerHTML = `<i class="bi bi-shield-lock-fill fs-5"></i>`;
-                document.body.appendChild(mobileAdminBtn);
             }
 
         } else {

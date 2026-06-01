@@ -780,8 +780,11 @@ body {
     .admin-floating-btn:active {
         transform: scale(0.9);
     }
+    
+    .admin-desktop-btn {
+        display: none !important;
+    }
 }
-
 
 /* ============================================================
    SISTEMA DE HORARIOS
