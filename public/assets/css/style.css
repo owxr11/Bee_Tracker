@@ -753,7 +753,35 @@ body {
         border-color: rgba(220, 53, 69, 0.4);
         background-color: rgba(220, 53, 69, 0.15);
     }
+
+.admin-floating-btn {
+    display: none !important; 
 }
+    .admin-floating-btn {
+        display: flex !important;
+        position: fixed !important;
+        top: 80px !important; 
+        right: 20px !important;
+        width: 45px !important;
+        height: 45px !important;
+        border-radius: 50% !important;
+        background-color: rgba(26, 27, 31, 0.9) !important;
+        border: 1px solid var(--ug-gold-bright) !important;
+        color: var(--ug-gold-bright) !important;
+        z-index: 1100 !important;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        transition: transform 0.2s ease;
+    }
+    
+    .admin-floating-btn:active {
+        transform: scale(0.9);
+    }
+}
+
 
 /* ============================================================
    SISTEMA DE HORARIOS

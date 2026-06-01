@@ -225,10 +225,10 @@ onAuthStateChanged(auth, async (user) => {
                 escucharChoferesEnTiempoReal();
             }
 
-            if (data.role === "admin") {
-                const sidebar = document.querySelector("ul.nav.flex-column");
+           if (data.role==="admin") {
+                const sidebar = document.querySelector(".nav.nav-pills");
                 const li = document.createElement("li");
-                li.className = "nav-item mt-2 d-none d-md-block";
+                li.className = "nav-item mt-2 d-none d-md-block"; 
                 li.innerHTML = `
                     <a href="admin.html" class="nav-link d-flex align-items-center p-3 transition-base">
                         <i class="bi bi-shield-lock-fill text-ug-gold-bright text-center"></i>
@@ -236,6 +236,12 @@ onAuthStateChanged(auth, async (user) => {
                     </a>
                 `;
                 sidebar.appendChild(li);
+
+                const mobileAdminBtn = document.createElement("a");
+                mobileAdminBtn.href = "admin.html";
+                mobileAdminBtn.className = "admin-floating-btn";
+                mobileAdminBtn.innerHTML = `<i class="bi bi-shield-lock-fill fs-5"></i>`;
+                document.body.appendChild(mobileAdminBtn);
             }
 
         } else {
